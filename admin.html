@@ -336,19 +336,16 @@
 
     <script>
         // ============================================================
-        //  SUPABASE CONFIG (uses the global supabaseClient from script.js)
-        // ============================================================
-        // The supabaseClient is already initialized in script.js
-        // If script.js is not loaded, fallback:
-        let supabaseClient = window.supabaseClient;
+//  SUPABASE CONFIG 
+// ============================================================
+const SUPABASE_URL = "https://aslkopamkdnvofjqzgjz.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_yZ8KyiOxJT3GBR_6wX1Plw_Yt_5IQ6f";
 
-        if (!supabaseClient) {
-            // Fallback for admin page if script.js not loaded
-            const SUPABASE_URL = "YOUR_SUPABASE_URL";
-            const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
-            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            window.supabaseClient = supabaseClient;
-        }
+// Initialize Supabase client
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Make it globally available so all functions can use it
+window.supabaseClient = supabase;
 
         // ============================================================
         //  LOAD ALL DATA
