@@ -4,309 +4,354 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Raptor – Contact</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-    <!-- ===== HEADER (exactly as index.html) ===== -->
-    <header>
-        <div>
-            <a href="index.html">The<span>Raptor</span></a>
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="blog.html">Blog</a>
-                <a href="podcast.html">Podcast</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-                <a href="#"><i class="fas fa-search"></i> Search</a>
-            </nav>
-            <div>
-                <button><i class="fas fa-moon"></i></button>
-                <button><span></span><span></span><span></span></button>
+    <!-- ===== HEADER (identical to index) ===== -->
+    <header id="mainHeader" class="site-header">
+        <div class="container">
+            <div class="row align-items-center py-3">
+                <div class="col-6 col-lg-3">
+                    <a href="index.html" class="site-logo">The<span>Raptor</span></a>
+                </div>
+                <div class="col-lg-7 d-none d-lg-block">
+                    <nav id="mainNav" class="main-nav">
+                        <a href="index.html" class="nav-link">Home</a>
+                        <a href="blog.html" class="nav-link">Blog</a>
+                        <a href="about.html" class="nav-link">About</a>
+                        <a href="contact.html" class="nav-link active">Contact</a>
+                        <a href="#" class="nav-link search-trigger" id="navSearchTrigger"><i class="fas fa-search"></i> Search</a>
+                    </nav>
+                </div>
+                <div class="col-6 col-lg-2 text-end">
+                    <button id="darkModeToggle" class="btn btn-outline-primary btn-sm me-2"><i class="fas fa-moon"></i></button>
+                    <button id="mobileMenuToggle" class="btn btn-outline-secondary btn-sm d-lg-none"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
+            <div id="mobileNav" class="d-lg-none" style="display:none;">
+                <nav class="mobile-nav py-3">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="blog.html" class="nav-link">Blog</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                    <a href="#" class="nav-link search-trigger"><i class="fas fa-search"></i> Search</a>
+                </nav>
+            </div>
+            <div id="globalSearchBar" class="row" style="display:none;">
+                <div class="col-12 py-3">
+                    <div class="search-wrapper">
+                        <input type="text" id="globalSearchInput" class="form-control form-control-lg" placeholder="Search for articles, topics, or keywords..." />
+                        <button id="globalSearchClose" class="btn btn-outline-secondary"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div id="searchResults" class="search-results mt-2"></div>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- ===== CONTACT HERO ===== -->
-    <section>
-        <div>
-            <div>
-                <span><i class="fas fa-address-book"></i> Get in touch</span>
-                <h1>Contact <span>The Raptor</span></h1>
-                <p>Have a breaking news tip, a story idea, or just want to share your feedback? Our team is ready to listen. We reply to every inquiry within 24 hours.</p>
-                <p><strong>For urgent matters:</strong> Call our news desk 24/7 at <a href="tel:+18005550199">+1 (800) 555‑0199</a></p>
+    <section id="contactHero" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <span class="badge bg-primary mb-3"><i class="fas fa-address-book"></i> Get in touch</span>
+                    <h1 class="fw-bold">Contact <span class="text-green">The Raptor</span></h1>
+                    <p class="lead">Have a breaking news tip, a story idea, or just want to share your feedback? Our team is ready to listen. We reply to every inquiry within 24 hours.</p>
+                    <p><strong>For urgent matters:</strong> Call our news desk 24/7 at <a href="tel:+18005550199" class="text-primary">+1 (800) 555‑0199</a></p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== CONTACT INFO + FORM (two columns) ===== -->
-    <section>
-        <div>
-            <!-- Left column: contact details -->
-            <div>
-                <h2>Reach our newsroom.</h2>
-                <p>Whether you're a source, a reader, or a fellow journalist, we value every message. Here's how you can reach the right person.</p>
-
-                <div>
-                    <div><i class="fas fa-envelope"></i></div>
-                    <div>
-                        <div><strong>Newsroom &amp; Tips</strong></div>
-                        <div><a href="mailto:news@theraptor.com">news@theraptor.com</a></div>
-                        <div><small>For breaking news, documents, and confidential tips.</small></div>
-                    </div>
-                </div>
-
-                <div>
-                    <div><i class="fas fa-user-edit"></i></div>
-                    <div>
-                        <div><strong>Editor-in-Chief</strong></div>
-                        <div><a href="mailto:jane.doe@theraptor.com">jane.doe@theraptor.com</a></div>
-                        <div><small>Editorial feedback, guest columns, and corrections.</small></div>
-                    </div>
-                </div>
-
-                <div>
-                    <div><i class="fas fa-bullhorn"></i></div>
-                    <div>
-                        <div><strong>Press &amp; PR</strong></div>
-                        <div><a href="mailto:press@theraptor.com">press@theraptor.com</a></div>
-                        <div><small>Media kits, interview requests, and partnerships.</small></div>
-                    </div>
-                </div>
-
-                <div>
-                    <div><i class="fas fa-map-marker-alt"></i></div>
-                    <div>
-                        <div><strong>Headquarters</strong></div>
-                        <div>123 Raptor Lane, Suite 400, New York, NY 10001</div>
-                        <div><small>Open Mon–Fri, 8:00 AM – 10:00 PM (EST)</small></div>
-                    </div>
-                </div>
-
-                <div>
-                    <div><i class="fas fa-phone-alt"></i></div>
-                    <div>
-                        <div><strong>News Desk (24/7)</strong></div>
-                        <div><a href="tel:+18005550199">+1 (800) 555‑0199</a></div>
-                        <div><small>For urgent stories, tips, and on‑the‑record comments.</small></div>
-                    </div>
-                </div>
-
-                <div>
-                    <div><strong>Follow us</strong></div>
-                    <div>
-                        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
-                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                        <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
-                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-                        <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right column: contact form -->
-            <div>
-                <h2>Send us a message</h2>
-                <p>Fill in the form below and we’ll get back to you as soon as possible.</p>
-                <form>
-                    <div>
-                        <label for="contactName">Your full name <span>*</span></label>
-                        <input type="text" id="contactName" placeholder="e.g. Alex Rivera" required />
-                    </div>
-                    <div>
-                        <label for="contactEmail">Email address <span>*</span></label>
-                        <input type="email" id="contactEmail" placeholder="alex@example.com" required />
-                    </div>
-                    <div>
-                        <label for="contactPhone">Phone number (optional)</label>
-                        <input type="tel" id="contactPhone" placeholder="+1 (555) 000‑0000" />
-                    </div>
-                    <div>
-                        <label for="contactSubject">Subject <span>*</span></label>
-                        <select id="contactSubject" required>
-                            <option value="">— Select a topic —</option>
-                            <option value="news-tip">News tip / story idea</option>
-                            <option value="press-release">Press release submission</option>
-                            <option value="feedback">Feedback or suggestion</option>
-                            <option value="correction">Request a correction</option>
-                            <option value="advertising">Advertising / partnership</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="contactMessage">Your message <span>*</span></label>
-                        <textarea id="contactMessage" placeholder="Tell us the details…" rows="5" required></textarea>
-                    </div>
-                    <div>
-                        <label>
-                            <input type="checkbox" required /> I confirm that the information provided is accurate and I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.
-                        </label>
-                        <label>
-                            <input type="checkbox" /> I would like to receive occasional updates and newsletters from The Raptor.
-                        </label>
-                    </div>
-                    <button type="submit"><i class="fas fa-paper-plane"></i> Send message</button>
-                    <div>
-                        <span><i class="fas fa-lock"></i> Your data is encrypted and secure.</span>
-                        <span><i class="fas fa-clock"></i> Average response time: 4 hours.</span>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== FREQUENTLY ASKED QUESTIONS (like a mini FAQ) ===== -->
-    <section>
-        <div>
-            <div>
-                <h2>Frequently <span>Asked Questions</span></h2>
-                <p>Quick answers to the most common inquiries we receive.</p>
-            </div>
-            <div>
-                <details>
-                    <summary><strong>How do I submit a press release or news tip?</strong></summary>
-                    <p>You can email our newsroom directly at <a href="mailto:news@theraptor.com">news@theraptor.com</a> with the subject line “TIP: [your headline]”. For sensitive documents, we encourage using our encrypted dropbox — contact us for the link.</p>
-                </details>
-                <details>
-                    <summary><strong>Can I republish an article from The Raptor?</strong></summary>
-                    <p>We offer syndication licenses for other media outlets. Please reach out to our partnerships team at <a href="mailto:press@theraptor.com">press@theraptor.com</a> with details about your publication and audience size.</p>
-                </details>
-                <details>
-                    <summary><strong>How can I request a correction or retraction?</strong></summary>
-                    <p>We take accuracy very seriously. If you spot an error, email our editorial team at <a href="mailto:jane.doe@theraptor.com">jane.doe@theraptor.com</a> with the article headline, the error, and a correction source. We aim to resolve all requests within 2 business days.</p>
-                </details>
-                <details>
-                    <summary><strong>Do you accept guest columns or op-eds?</strong></summary>
-                    <p>Yes, we welcome thoughtful, fact‑based opinion pieces from subject‑matter experts. Please send a brief pitch (2–3 sentences) and your CV to our editor at <a href="mailto:jane.doe@theraptor.com">jane.doe@theraptor.com</a>. We do not publish unsolicited full drafts.</p>
-                </details>
-                <details>
-                    <summary><strong>I have a confidential document to share — is there a secure way?</strong></summary>
-                    <p>Absolutely. We use industry‑standard secure file transfer. Please contact our news desk at <a href="tel:+18005550199">+1 (800) 555‑0199</a> and ask for the security team to arrange a secure channel.</p>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== NEWSLETTER (exactly as index.html, to keep brand consistency) ===== -->
-    <section>
-        <div>
-            <div>
-                <h2>Subscribe to <span>The Raptor</span> Daily</h2>
-                <p>Join over 250,000 readers who start their morning with our curated briefing. Get the top 5 stories, exclusive insights, and a weekly deep‑dive — all free.</p>
-                <div>
-                    <form>
+    <!-- ===== CONTACT INFO + FORM ===== -->
+    <section id="contactFormSection" class="py-5">
+        <div class="container">
+            <div class="row g-5">
+                <!-- Left column: details -->
+                <div class="col-lg-5">
+                    <h2 class="fw-bold">Reach our newsroom.</h2>
+                    <p>Whether you're a source, a reader, or a fellow journalist, we value every message.</p>
+                    <div class="d-flex gap-3 mb-3">
+                        <i class="fas fa-envelope text-primary fs-4"></i>
                         <div>
-                            <label for="newsletterEmail">Email address</label>
-                            <input type="email" id="newsletterEmail" placeholder="you@example.com" required />
+                            <strong>Newsroom &amp; Tips</strong><br />
+                            <a href="mailto:news@theraptor.com" class="text-decoration-none">news@theraptor.com</a>
+                            <div class="text-muted small">For breaking news, documents, and confidential tips.</div>
                         </div>
+                    </div>
+                    <div class="d-flex gap-3 mb-3">
+                        <i class="fas fa-user-edit text-green fs-4"></i>
                         <div>
-                            <label for="newsletterFrequency">Preferred frequency</label>
-                            <select id="newsletterFrequency">
-                                <option value="daily">Daily (every morning)</option>
-                                <option value="weekly">Weekly (every Monday)</option>
-                                <option value="weekend">Weekend roundup (Saturday)</option>
+                            <strong>Editor-in-Chief</strong><br />
+                            <a href="mailto:jane.doe@theraptor.com" class="text-decoration-none">jane.doe@theraptor.com</a>
+                            <div class="text-muted small">Editorial feedback, guest columns, and corrections.</div>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3 mb-3">
+                        <i class="fas fa-bullhorn text-primary fs-4"></i>
+                        <div>
+                            <strong>Press &amp; PR</strong><br />
+                            <a href="mailto:press@theraptor.com" class="text-decoration-none">press@theraptor.com</a>
+                            <div class="text-muted small">Media kits, interview requests, and partnerships.</div>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3 mb-3">
+                        <i class="fas fa-map-marker-alt text-green fs-4"></i>
+                        <div>
+                            <strong>Headquarters</strong><br />
+                            <span>123 Raptor Lane, Suite 400, New York, NY 10001</span>
+                            <div class="text-muted small">Open Mon–Fri, 8:00 AM – 10:00 PM (EST)</div>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3 mb-3">
+                        <i class="fas fa-phone-alt text-primary fs-4"></i>
+                        <div>
+                            <strong>News Desk (24/7)</strong><br />
+                            <a href="tel:+18005550199" class="text-decoration-none">+1 (800) 555‑0199</a>
+                            <div class="text-muted small">For urgent stories, tips, and on‑the‑record comments.</div>
+                        </div>
+                    </div>
+                    <div>
+                        <strong>Follow us</strong>
+                        <div class="mt-2">
+                            <a href="#" class="text-muted me-2"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-muted me-2"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="text-muted me-2"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="text-muted me-2"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right column: form -->
+                <div class="col-lg-7">
+                    <h2 class="fw-bold">Send us a message</h2>
+                    <p>Fill in the form below and we’ll get back to you as soon as possible.</p>
+                    <form id="contactForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="contactName" class="form-label">Your full name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="contactName" placeholder="e.g. Alex Rivera" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="contactEmail" class="form-label">Email address <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="contactEmail" placeholder="alex@example.com" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="contactPhone" class="form-label">Phone number (optional)</label>
+                                <input type="tel" class="form-control" id="contactPhone" placeholder="+1 (555) 000‑0000" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="contactSubject" class="form-label">Subject <span class="text-danger">*</span></label>
+                                <select class="form-select" id="contactSubject" required>
+                                    <option value="">— Select a topic —</option>
+                                    <option value="news-tip">News tip / story idea</option>
+                                    <option value="press-release">Press release submission</option>
+                                    <option value="feedback">Feedback or suggestion</option>
+                                    <option value="correction">Request a correction</option>
+                                    <option value="advertising">Advertising / partnership</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="contactMessage" class="form-label">Your message <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="contactMessage" rows="5" placeholder="Tell us the details…" required></textarea>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="agreeCheck" required />
+                                    <label class="form-check-label" for="agreeCheck">I confirm that the information provided is accurate and I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="newsletterOptIn" />
+                                    <label class="form-check-label" for="newsletterOptIn">I would like to receive occasional updates and newsletters from The Raptor.</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send message</button>
+                            </div>
+                            <div class="col-12">
+                                <span class="text-muted small"><i class="fas fa-lock"></i> Your data is encrypted and secure.</span>
+                                <span class="text-muted small ms-3"><i class="fas fa-clock"></i> Average response time: 4 hours.</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section id="faqSection" class="py-5 bg-light">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col text-center">
+                    <h2 class="fw-bold">Frequently <span class="text-green">Asked Questions</span></h2>
+                    <p class="text-muted">Quick answers to the most common inquiries we receive.</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    How do I submit a press release or news tip?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">You can email our newsroom directly at <a href="mailto:news@theraptor.com">news@theraptor.com</a> with the subject line “TIP: [your headline]”. For sensitive documents, we encourage using our encrypted dropbox — contact us for the link.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Can I republish an article from The Raptor?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">We offer syndication licenses for other media outlets. Please reach out to our partnerships team at <a href="mailto:press@theraptor.com">press@theraptor.com</a> with details about your publication and audience size.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    How can I request a correction or retraction?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">We take accuracy very seriously. If you spot an error, email our editorial team at <a href="mailto:jane.doe@theraptor.com">jane.doe@theraptor.com</a> with the article headline, the error, and a correction source. We aim to resolve all requests within 2 business days.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Do you accept guest columns or op-eds?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">Yes, we welcome thoughtful, fact‑based opinion pieces from subject‑matter experts. Please send a brief pitch (2–3 sentences) and your CV to our editor at <a href="mailto:jane.doe@theraptor.com">jane.doe@theraptor.com</a>. We do not publish unsolicited full drafts.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                    I have a confidential document to share — is there a secure way?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">Absolutely. We use industry‑standard secure file transfer. Please contact our news desk at <a href="tel:+18005550199">+1 (800) 555‑0199</a> and ask for the security team to arrange a secure channel.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEWSLETTER (only on index and contact) ===== -->
+    <section id="newsletterSection" class="py-5" style="background: linear-gradient(135deg, #1a5276, #1e8449);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center text-white">
+                    <h2 class="fw-bold">Subscribe to <span style="opacity:0.9;">The Raptor</span> Daily</h2>
+                    <p>Join over 250,000 readers who start their morning with our curated briefing. Get the top 5 stories, exclusive insights, and a weekly deep‑dive — all free.</p>
+                    <form id="newsletterForm" class="row g-3 justify-content-center mt-3">
+                        <div class="col-md-4">
+                            <input type="email" class="form-control" placeholder="Email address" required />
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select">
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="weekend">Weekend</option>
                             </select>
                         </div>
-                        <div>
-                            <label>
-                                <input type="checkbox" checked /> I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms</a>
-                            </label>
-                            <label>
-                                <input type="checkbox" /> I want to receive occasional special reports and offers
-                            </label>
+                        <div class="col-md-auto">
+                            <button type="submit" class="btn btn-light"><i class="fas fa-envelope"></i> Subscribe</button>
                         </div>
-                        <button type="submit"><i class="fas fa-envelope"></i> Subscribe Now</button>
                     </form>
-                    <div>
-                        <span><i class="fas fa-check-circle"></i> No spam, unsubscribe anytime</span>
-                        <span><i class="fas fa-lock"></i> Your data is secure</span>
-                        <span><i class="fas fa-star"></i> Trusted by 250k+ readers</span>
+                    <div class="mt-3 d-flex flex-wrap justify-content-center gap-3">
+                        <span><i class="fas fa-check-circle"></i> No spam</span>
+                        <span><i class="fas fa-lock"></i> Secure</span>
+                        <span><i class="fas fa-star"></i> 250k+ readers</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== FOOTER (identical to index.html) ===== -->
-    <footer>
-        <div>
-            <div>
-
-                <!-- About column -->
-                <div>
-                    <a href="index.html">The<span>Raptor</span></a>
-                    <p>Independent, fact‑based journalism since 2012. We believe in the power of stories to inform, inspire, and drive change. Our team of 45 journalists operates across 20 countries.</p>
+    <!-- ===== FOOTER (identical to index) ===== -->
+    <footer id="mainFooter" class="py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <a href="index.html" class="site-logo text-white">The<span class="text-green">Raptor</span></a>
+                    <p class="text-muted small mt-2">Independent, fact‑based journalism since 2012. Our team of 45 journalists operates across 20 countries.</p>
                     <div>
-                        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
-                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                        <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
-                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-                        <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="#" class="text-muted me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-muted me-2"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-muted me-2"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="text-muted me-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
-
-                <!-- Quick links -->
-                <div>
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Homepage</a></li>
-                        <li><a href="blog.html">All Articles</a></li>
-                        <li><a href="podcast.html">Podcast</a></li>
-                        <li><a href="about.html">Our Team</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="#">Advertise</a></li>
-                        <li><a href="#">Careers</a></li>
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="fw-bold">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-muted text-decoration-none">Homepage</a></li>
+                        <li><a href="blog.html" class="text-muted text-decoration-none">All Articles</a></li>
+                        <li><a href="about.html" class="text-muted text-decoration-none">Our Team</a></li>
+                        <li><a href="contact.html" class="text-muted text-decoration-none">Contact Us</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Advertise</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Careers</a></li>
                     </ul>
                 </div>
-
-                <!-- Categories -->
-                <div>
-                    <h4>Categories</h4>
-                    <ul>
-                        <li><a href="#">World</a> (126)</li>
-                        <li><a href="#">Technology</a> (98)</li>
-                        <li><a href="#">Business</a> (74)</li>
-                        <li><a href="#">Sports</a> (52)</li>
-                        <li><a href="#">Culture</a> (43)</li>
-                        <li><a href="#">Science</a> (38)</li>
-                        <li><a href="#">Health</a> (31)</li>
-                        <li><a href="#">Travel</a> (27)</li>
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="fw-bold">Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none">World</a> (126)</li>
+                        <li><a href="#" class="text-muted text-decoration-none">Technology</a> (98)</li>
+                        <li><a href="#" class="text-muted text-decoration-none">Business</a> (74)</li>
+                        <li><a href="#" class="text-muted text-decoration-none">Sports</a> (52)</li>
+                        <li><a href="#" class="text-muted text-decoration-none">Culture</a> (43)</li>
+                        <li><a href="#" class="text-muted text-decoration-none">Science</a> (38)</li>
+                        <li><a href="#" class="text-muted text-decoration-none">Health</a> (31)</li>
+                        <li><a href="#" class="text-muted text-decoration-none">Travel</a> (27)</li>
                     </ul>
                 </div>
-
-                <!-- Contact & archives -->
-                <div>
-                    <h4>Get in Touch</h4>
-                    <ul>
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:info@theraptor.com">info@theraptor.com</a></li>
-                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                        <li><i class="fas fa-map-pin"></i> 123 News Avenue, New York, NY 10001</li>
-                        <li><i class="fas fa-clock"></i> Mon–Fri: 8:00 AM – 10:00 PM (EST)</li>
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="fw-bold">Get in Touch</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope text-muted"></i> <a href="mailto:info@theraptor.com" class="text-muted text-decoration-none">info@theraptor.com</a></li>
+                        <li><i class="fas fa-phone text-muted"></i> <span class="text-muted">+1 (555) 123-4567</span></li>
+                        <li><i class="fas fa-map-pin text-muted"></i> <span class="text-muted">123 News Avenue, NY</span></li>
+                        <li><i class="fas fa-clock text-muted"></i> <span class="text-muted">Mon–Fri: 8AM–10PM</span></li>
                     </ul>
-                    <h4>Archives</h4>
-                    <ul>
-                        <li><a href="#">2026</a> • <a href="#">2025</a> • <a href="#">2024</a></li>
-                        <li><a href="#">Special Reports</a> • <a href="#">Interviews</a></li>
+                    <h5 class="fw-bold mt-3">Archives</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none">2026</a> • <a href="#" class="text-muted text-decoration-none">2025</a> • <a href="#" class="text-muted text-decoration-none">2024</a></li>
                     </ul>
-                </div>
-
-            </div>
-
-            <!-- Bottom bar -->
-            <div>
-                <p>&copy; 2026 The Raptor Media Group. All rights reserved. | ISSN 2834-5678</p>
-                <div>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Cookie Settings</a>
-                    <a href="#">Accessibility</a>
-                    <a href="#">RSS Feed</a>
                 </div>
             </div>
-
+            <hr class="border-secondary" />
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-muted small mb-0">&copy; 2026 The Raptor Media Group. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-muted small text-decoration-none me-2">Privacy</a>
+                    <a href="#" class="text-muted small text-decoration-none me-2">Terms</a>
+                    <a href="#" class="text-muted small text-decoration-none">RSS</a>
+                </div>
+            </div>
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
