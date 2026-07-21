@@ -1,16 +1,14 @@
+// ============================================================
+//  SUPABASE CONFIG – REPLACE THESE WITH YOUR ACTUAL KEYS
+// ============================================================
+const SUPABASE_URL = "https://aslkopamkdnvofjqzgjz.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_yZ8KyiOxJT3GBR_6wX1Plw_Yt_5IQ6f";
 
-           // ============================================================
-        //  SUPABASE CONFIG – REPLACE THESE WITH YOUR ACTUAL KEYS
-        // ============================================================
-        const SUPABASE_URL = "https://aslkopamkdnvofjqzgjz.supabase.co";
-        const SUPABASE_ANON_KEY = "sb_publishable_yZ8KyiOxJT3GBR_6wX1Plw_Yt_5IQ6f";
+// Initialize Supabase client
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Initialize Supabase client
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        // Make it globally available so script.js can use it
-        window.supabaseClient = supabase;
-        });
+// Make it globally available so all functions can use it
+window.supabaseClient = supabase;
 
 // ============================================
 //  GLOBALS
@@ -367,40 +365,7 @@ function initMobileMenu() {
 }
 
 // ============================================
-//  NEWSLETTER & CONTACT FORMS
-// ============================================
-function initForms() {
-    // Newsletter forms
-    document.querySelectorAll('#newsletterForm').forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for subscribing! (Demo)');
-            this.reset();
-        });
-    });
-    // Contact form
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Your message has been sent! (Demo)');
-            this.reset();
-        });
-    }
-}
-
-// ============================================
-//  INITIALIZATION
-// ============================================
-document.addEventListener('DOMContentLoaded', function() {
-    initDarkMode();
-    initMobileMenu();
-    initSearch();
-    initCategoryFilters();
-    initForms();
-});
-// ============================================
-//  CONTACT FORM (send to Supabase + WhatsApp)
+//  CONTACT FORM (send to Supabase)
 // ============================================
 async function submitContactForm(formData) {
     try {
@@ -447,4 +412,104 @@ async function subscribeNewsletter(email, frequency = 'daily') {
     }
 }
 
+// ============================================
+//  NEWSLETTER & CONTACT FORMS (INIT)
+// ============================================
+function initForms() {
+    // --- NEWSLETTER FORM ---
+    document.querySelectorAll('#newsletterForm').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const emailInput = this.querySelector('input[type="email"]');
+            const selectInput = this.querySelector('select');
+            
+            if (!emailInput || !emailInput.value) {
+                alert('Please enter your email address.');
+                return;
+            }
 
+            const email = emailInput.value.trim();
+            const frequency = selectInput ? selectInput.value : 'daily';
+
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subscribing...';
+
+            const result = await subscribeNewsletter(email, frequency);
+            
+            // Reset button
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+
+            if (result.success) {
+                alert('🎉 Thank you for subscribing to The Raptor newsletter!');
+                this.reset();
+            } else {
+                alert(result.message || '❌ Something went wrong. Please try again.');
+            }
+        });
+    });
+
+    // --- CONTACT FORM ---
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('contactName')?.value.trim();
+            const email = document.getElementById('contactEmail')?.value.trim();
+            const phone = document.getElementById('contactPhone')?.value.trim() || null;
+            const subject = document.getElementById('contactSubject')?.value;
+            const message = document.getElementById('contactMessage')?.value.trim();
+
+            // Validation
+            if (!name || !email || !message) {
+                alert('Please fill in all required fields (Name, Email, Message).');
+                return;
+            }
+
+            if (!subject || subject === '') {
+                alert('Please select a subject.');
+                return;
+            }
+
+            const formData = { name, email, phone, subject, message };
+
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+            const result = await submitContactForm(formData);
+
+            // Reset button
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+
+            if (result.success) {
+                alert('✅ Your message has been sent! We\'ll get back to you within 24 hours.');
+                this.reset();
+            } else {
+                alert('❌ Failed to send your message. Please try again or contact us directly at info@theraptor.com');
+            }
+        });
+    }
+}
+
+// ============================================
+//  INITIALIZATION
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    initDarkMode();
+    initMobileMenu();
+    initSearch();
+    initCategoryFilters();
+    initForms();
+
+    // The page-specific load functions are called from the inline script
+    // (e.g., loadBlogArticles('all'), loadFeaturedArticle(), etc.)
+    // They are already invoked in each page's inline script block.
+});
