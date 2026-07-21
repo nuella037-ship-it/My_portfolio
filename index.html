@@ -1,85 +1,481 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Raptor – Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header class="header">
-        <div class="container">
-            <a href="index.html" class="logo">The<span>Raptor</span></a>
-            <nav class="nav-links" id="navLinks">
-                <a href="index.html" class="active">Home</a>
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div>
+            <a href="index.html">The<span>Raptor</span></a>
+            <nav>
+                <a href="index.html">Home</a>
                 <a href="blog.html">Blog</a>
+                <a href="podcast.html">Podcast</a>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
-                <a href="#" id="searchToggle" style="padding:8px 12px;background:var(--bg-card);border-radius:50px;">
-                    <i class="fas fa-search"></i>
-                </a>
+                <a href="#"><i class="fas fa-search"></i> Search</a>
             </nav>
-            <div style="display:flex;align-items:center;gap:6px;">
-                <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
-                <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            <div>
+                <button><i class="fas fa-moon"></i></button>
+                <button><span></span><span></span><span></span></button>
             </div>
         </div>
     </header>
 
-    <!-- HERO / BREAKING NEWS -->
-    <section class="hero" style="padding:calc(var(--header-height) + 40px) 0 40px;">
-        <div class="container">
-            <div class="breaking-news">
-                <span class="label"><i class="fas fa-bolt"></i> Breaking</span>
-                <span class="headline" id="breakingHeadline">City Council Approves New Park Renovation – <a href="#">Read more</a></span>
+    <!-- ===== HERO / BREAKING + FEATURED ===== -->
+    <section>
+        <div>
+
+            <!-- Breaking News Ticker -->
+            <div>
+                <div>
+                    <span><i class="fas fa-bolt"></i> Breaking</span>
+                    <span>
+                        <strong>Just now:</strong> City Council Approves New Park Renovation – <a href="#">Read more</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <strong>2 min ago:</strong> Oil Prices Drop to 6-Month Low – <a href="#">Markets react</a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <strong>15 min ago:</strong> NASA Announces New Mars Mission Timeline – <a href="#">Details inside</a>
+                    </span>
+                </div>
             </div>
-            <div class="featured-article">
-                <div class="article-image">
+
+            <!-- Featured Article (hero) -->
+            <div>
+                <div>
+                    <!-- image placeholder -->
                     <i class="fas fa-newspaper"></i>
+                    <div>
+                        <span>Exclusive</span>
+                        <span>May 18, 2026</span>
+                    </div>
                 </div>
-                <div class="article-content">
-                    <span class="tag featured-tag">Featured</span>
-                    <h2 id="featuredTitle">Global Climate Summit Reaches Historic Agreement</h2>
-                    <div class="meta" id="featuredMeta">May 18, 2026 • International</div>
-                    <p id="featuredExcerpt">Nations pledge to cut carbon emissions by 50% by 2030 in a landmark deal that reshapes global climate policy.</p>
-                    <a href="#" class="read-more">Read full story →</a>
+                <div>
+                    <span>Featured Story</span>
+                    <h2>Global Climate Summit Reaches Historic Agreement</h2>
+                    <div>
+                        <span>By <strong>Elena Rodriguez</strong></span>
+                        <span>•</span>
+                        <span>5 min read</span>
+                        <span>•</span>
+                        <span><i class="fas fa-comment"></i> 142 comments</span>
+                    </div>
+                    <p>In a landmark turn of events, representatives from 195 nations have unanimously pledged to cut carbon emissions by 50% by 2030, marking the most ambitious climate accord in history. The deal includes a $200 billion fund to support developing nations in their green transition, strict penalties for non-compliance, and a new independent oversight committee.</p>
+                    <ul>
+                        <li><strong>Key points:</strong> Binding emissions targets for every signatory</li>
+                        <li>Phased elimination of fossil fuel subsidies by 2028</li>
+                        <li>Mandatory reforestation commitments</li>
+                    </ul>
+                    <div>
+                        <a href="#">Read full story →</a>
+                        <a href="#"><i class="fas fa-share-alt"></i> Share</a>
+                        <a href="#"><i class="fas fa-bookmark"></i> Save</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== LATEST STORIES (expanded to 6) ===== -->
+    <section>
+        <div>
+            <div>
+                <h2>Latest <span>Stories</span></h2>
+                <div>
+                    <span>Updated every hour</span>
+                    <a href="blog.html">View all articles <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <!-- Card 1 -->
+                <article>
+                    <span>Technology</span>
+                    <h3><a href="#">AI Breakthrough in Medical Imaging Detects Early-Stage Cancers</a></h3>
+                    <div>
+                        <span>By <strong>Dr. Elena Moore</strong></span>
+                        <span>•</span>
+                        <span>May 17, 2026</span>
+                        <span>•</span>
+                        <span>5 min read</span>
+                    </div>
+                    <p>Researchers at Stanford have developed a new deep-learning model that analyses MRI and CT scans with 98.7% accuracy, identifying malignancies up to 18 months earlier than traditional methods. The system has already been tested on over 50,000 patients.</p>
+                    <div>
+                        <span><i class="fas fa-tag"></i> AI, Healthcare, Innovation</span>
+                        <span><i class="fas fa-comment"></i> 87 comments</span>
+                        <span><i class="fas fa-clock"></i> 3 hours ago</span>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article>
+                    <span>Business</span>
+                    <h3><a href="#">Global Markets Rally as Tech Giants Post Record Earnings</a></h3>
+                    <div>
+                        <span>By <strong>James Carter</strong></span>
+                        <span>•</span>
+                        <span>May 16, 2026</span>
+                        <span>•</span>
+                        <span>4 min read</span>
+                    </div>
+                    <p>The S&P 500 and NASDAQ surged over 3% after Apple, Microsoft, and Nvidia reported quarterly results that exceeded all analyst expectations. The rally was further fuelled by optimistic forward guidance and increased AI infrastructure spending.</p>
+                    <div>
+                        <span><i class="fas fa-tag"></i> Finance, Stocks, Economy</span>
+                        <span><i class="fas fa-comment"></i> 64 comments</span>
+                        <span><i class="fas fa-clock"></i> 5 hours ago</span>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article>
+                    <span>Sports</span>
+                    <h3><a href="#">Champions League Final: Underdogs Stun Favourites in Extra Time</a></h3>
+                    <div>
+                        <span>By <strong>Maria Santos</strong></span>
+                        <span>•</span>
+                        <span>May 15, 2026</span>
+                        <span>•</span>
+                        <span>6 min read</span>
+                    </div>
+                    <p>In one of the most dramatic finals in recent memory, Borussia Dortmund defeated Real Madrid 3–2 with a 118th-minute header from captain Marco Reus. The match saw three lead changes and a record-breaking 28 shots on target.</p>
+                    <div>
+                        <span><i class="fas fa-tag"></i> Football, UEFA, Highlights</span>
+                        <span><i class="fas fa-comment"></i> 213 comments</span>
+                        <span><i class="fas fa-clock"></i> 1 day ago</span>
+                    </div>
+                </article>
+
+                <!-- Card 4 -->
+                <article>
+                    <span>Culture</span>
+                    <h3><a href="#">Street Art Festival Transforms Downtown with 50+ Murals</a></h3>
+                    <div>
+                        <span>By <strong>Liam O'Brien</strong></span>
+                        <span>•</span>
+                        <span>May 14, 2026</span>
+                        <span>•</span>
+                        <span>3 min read</span>
+                    </div>
+                    <p>Over 150 international artists descended on the city for the annual Mural Fest, painting vibrant large-scale works on building facades, bridges, and public plazas. Organisers expect over 200,000 visitors this weekend.</p>
+                    <div>
+                        <span><i class="fas fa-tag"></i> Art, Community, Events</span>
+                        <span><i class="fas fa-comment"></i> 41 comments</span>
+                        <span><i class="fas fa-clock"></i> 2 days ago</span>
+                    </div>
+                </article>
+
+                <!-- Card 5 (new) -->
+                <article>
+                    <span>Science</span>
+                    <h3><a href="#">Scientists Successfully Grow Mini-Brains with Functional Neural Networks</a></h3>
+                    <div>
+                        <span>By <strong>Dr. Aisha Khan</strong></span>
+                        <span>•</span>
+                        <span>May 13, 2026</span>
+                        <span>•</span>
+                        <span>7 min read</span>
+                    </div>
+                    <p>In a groundbreaking study published in Nature, a team from MIT has cultivated cerebral organoids that exhibit spontaneous electrical activity and synaptic connectivity, opening new avenues for Alzheimer's and Parkinson's research.</p>
+                    <div>
+                        <span><i class="fas fa-tag"></i> Neuroscience, Research, Genetics</span>
+                        <span><i class="fas fa-comment"></i> 112 comments</span>
+                        <span><i class="fas fa-clock"></i> 3 days ago</span>
+                    </div>
+                </article>
+
+                <!-- Card 6 (new) -->
+                <article>
+                    <span>Politics</span>
+                    <h3><a href="#">Election Reform Bill Passes First Reading with Bipartisan Support</a></h3>
+                    <div>
+                        <span>By <strong>Sarah Chen</strong></span>
+                        <span>•</span>
+                        <span>May 12, 2026</span>
+                        <span>•</span>
+                        <span>5 min read</span>
+                    </div>
+                    <p>The proposed Fair Representation Act, which includes ranked-choice voting, independent redistricting, and campaign finance transparency, cleared its first major hurdle in parliament with a 68–32 vote. Final reading is scheduled for next month.</p>
+                    <div>
+                        <span><i class="fas fa-tag"></i> Government, Law, Democracy</span>
+                        <span><i class="fas fa-comment"></i> 156 comments</span>
+                        <span><i class="fas fa-clock"></i> 4 days ago</span>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CATEGORIES (expanded) ===== -->
+    <section>
+        <div>
+            <div>
+                <h2>Explore <span>Categories</span></h2>
+                <span>Find the topics that matter to you</span>
+            </div>
+            <div>
+                <div>
+                    <i class="fas fa-globe-americas"></i>
+                    <h4>World News</h4>
+                    <span>126 articles • 12 contributors</span>
+                    <p>Geopolitics, diplomacy, and global affairs</p>
+                </div>
+                <div>
+                    <i class="fas fa-microchip"></i>
+                    <h4>Technology</h4>
+                    <span>98 articles • 9 contributors</span>
+                    <p>AI, gadgets, cybersecurity, and innovation</p>
+                </div>
+                <div>
+                    <i class="fas fa-chart-pie"></i>
+                    <h4>Business &amp; Finance</h4>
+                    <span>74 articles • 7 contributors</span>
+                    <p>Markets, startups, and economic trends</p>
+                </div>
+                <div>
+                    <i class="fas fa-football-ball"></i>
+                    <h4>Sports</h4>
+                    <span>52 articles • 5 contributors</span>
+                    <p>Football, basketball, tennis, and more</p>
+                </div>
+                <div>
+                    <i class="fas fa-paint-brush"></i>
+                    <h4>Culture &amp; Arts</h4>
+                    <span>43 articles • 4 contributors</span>
+                    <p>Film, music, literature, and exhibitions</p>
+                </div>
+                <div>
+                    <i class="fas fa-flask"></i>
+                    <h4>Science &amp; Environment</h4>
+                    <span>38 articles • 6 contributors</span>
+                    <p>Climate, space, biology, and physics</p>
+                </div>
+                <div>
+                    <i class="fas fa-heartbeat"></i>
+                    <h4>Health &amp; Wellness</h4>
+                    <span>31 articles • 3 contributors</span>
+                    <p>Nutrition, mental health, and medical breakthroughs</p>
+                </div>
+                <div>
+                    <i class="fas fa-plane"></i>
+                    <h4>Travel &amp; Lifestyle</h4>
+                    <span>27 articles • 4 contributors</span>
+                    <p>Destinations, food, and living well</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- LATEST STORIES -->
-    <section style="padding:40px 0 80px;">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Latest <span class="highlight">Stories</span></h2>
+    <!-- ===== TRENDING NOW (expanded to 8) ===== -->
+    <section>
+        <div>
+            <div>
+                <h2>Trending <span>Now</span></h2>
+                <span>Most discussed stories today</span>
             </div>
-            <div class="projects-grid" id="homeGrid">
-                <!-- Injected via JS (first 4 posts) -->
-            </div>
-            <div style="text-align:center;margin-top:40px;">
-                <a href="blog.html" class="btn btn-primary"><i class="fas fa-arrow-right"></i> View All Articles</a>
+            <div>
+                <!-- item 1 -->
+                <div>
+                    <span>01</span>
+                    <div>
+                        <h4><a href="#">New Electric Vehicle Breaks Speed Record at 450 km/h</a></h4>
+                        <span>By <strong>Auto Desk</strong> • 2 hours ago • 1.2k shares</span>
+                        <p>The Rimac Nevera 2.0 shattered the previous EV record, accelerating from 0–100 in just 1.8 seconds.</p>
+                    </div>
+                </div>
+                <!-- item 2 -->
+                <div>
+                    <span>02</span>
+                    <div>
+                        <h4><a href="#">UN Announces $50 Billion Food Security Initiative for Africa</a></h4>
+                        <span>By <strong>Global Affairs</strong> • 4 hours ago • 987 shares</span>
+                        <p>The program aims to boost local farming, irrigation, and supply chains across 30 nations.</p>
+                    </div>
+                </div>
+                <!-- item 3 -->
+                <div>
+                    <span>03</span>
+                    <div>
+                        <h4><a href="#">Blockchain Adoption Surges as Major Banks Launch Crypto Services</a></h4>
+                        <span>By <strong>Finance Weekly</strong> • 6 hours ago • 845 shares</span>
+                        <p>JPMorgan, HSBC, and BNP Paribas now offer custodial and trading services for institutional clients.</p>
+                    </div>
+                </div>
+                <!-- item 4 -->
+                <div>
+                    <span>04</span>
+                    <div>
+                        <h4><a href="#">Historic Peace Deal Signed in the Middle East After Years of Conflict</a></h4>
+                        <span>By <strong>Diplomatic Correspondent</strong> • 8 hours ago • 1.4k shares</span>
+                        <p>The agreement includes border adjustments, mutual recognition, and a joint economic zone.</p>
+                    </div>
+                </div>
+                <!-- item 5 (new) -->
+                <div>
+                    <span>05</span>
+                    <div>
+                        <h4><a href="#">New Study Reveals Mediterranean Diet Slows Brain Ageing by 5 Years</a></h4>
+                        <span>By <strong>Health Desk</strong> • 10 hours ago • 672 shares</span>
+                        <p>Long-term research shows that olive oil, fish, and leafy greens boost cognitive resilience.</p>
+                    </div>
+                </div>
+                <!-- item 6 (new) -->
+                <div>
+                    <span>06</span>
+                    <div>
+                        <h4><a href="#">SpaceX Launches First All-Civilian Mission to Lunar Orbit</a></h4>
+                        <span>By <strong>Space Today</strong> • 12 hours ago • 1.1k shares</span>
+                        <p>The four-person crew will spend 8 days in lunar orbit, conducting scientific experiments.</p>
+                    </div>
+                </div>
+                <!-- item 7 (new) -->
+                <div>
+                    <span>07</span>
+                    <div>
+                        <h4><a href="#">Record-Breaking Heatwave Grips Southern Europe – Emergency Plans Activated</a></h4>
+                        <span>By <strong>Weather Desk</strong> • 14 hours ago • 734 shares</span>
+                        <p>Temperatures exceed 45°C in Spain and Italy, with authorities issuing red alerts.</p>
+                    </div>
+                </div>
+                <!-- item 8 (new) -->
+                <div>
+                    <span>08</span>
+                    <div>
+                        <h4><a href="#">Hollywood Writers' Union Reaches Tentative Deal with Studios</a></h4>
+                        <span>By <strong>Entertainment Weekly</strong> • 16 hours ago • 512 shares</span>
+                        <p>The new contract includes AI protections, residual increases, and minimum staffing guarantees.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container">
-            <div class="copy">&copy; 2026 The Raptor. All rights reserved.</div>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+    <!-- ===== NEWSLETTER (enhanced with more fields) ===== -->
+    <section>
+        <div>
+            <div>
+                <h2>Subscribe to <span>The Raptor</span> Daily</h2>
+                <p>Join over 250,000 readers who start their morning with our curated briefing. Get the top 5 stories, exclusive insights, and a weekly deep-dive — all free.</p>
+                <div>
+                    <form>
+                        <div>
+                            <label for="email">Email address</label>
+                            <input type="email" id="email" placeholder="you@example.com" required />
+                        </div>
+                        <div>
+                            <label for="frequency">Preferred frequency</label>
+                            <select id="frequency">
+                                <option value="daily">Daily (every morning)</option>
+                                <option value="weekly">Weekly (every Monday)</option>
+                                <option value="weekend">Weekend roundup (Saturday)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" checked /> I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms</a>
+                            </label>
+                            <label>
+                                <input type="checkbox" /> I want to receive occasional special reports and offers
+                            </label>
+                        </div>
+                        <button type="submit"><i class="fas fa-envelope"></i> Subscribe Now</button>
+                    </form>
+                    <div>
+                        <span><i class="fas fa-check-circle"></i> No spam, unsubscribe anytime</span>
+                        <span><i class="fas fa-lock"></i> Your data is secure</span>
+                        <span><i class="fas fa-star"></i> Trusted by 250k+ readers</span>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER (expanded) ===== -->
+    <footer>
+        <div>
+            <div>
+
+                <!-- About column -->
+                <div>
+                    <a href="index.html">The<span>Raptor</span></a>
+                    <p>Independent, fact-based journalism since 2012. We believe in the power of stories to inform, inspire, and drive change. Our team of 45 journalists operates across 20 countries.</p>
+                    <div>
+                        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                </div>
+
+                <!-- Quick links -->
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Homepage</a></li>
+                        <li><a href="blog.html">All Articles</a></li>
+                        <li><a href="podcast.html">Podcast</a></li>
+                        <li><a href="about.html">Our Team</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Advertise</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Categories -->
+                <div>
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#">World</a> (126)</li>
+                        <li><a href="#">Technology</a> (98)</li>
+                        <li><a href="#">Business</a> (74)</li>
+                        <li><a href="#">Sports</a> (52)</li>
+                        <li><a href="#">Culture</a> (43)</li>
+                        <li><a href="#">Science</a> (38)</li>
+                        <li><a href="#">Health</a> (31)</li>
+                        <li><a href="#">Travel</a> (27)</li>
+                    </ul>
+                </div>
+
+                <!-- Contact & archives -->
+                <div>
+                    <h4>Get in Touch</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:info@theraptor.com">info@theraptor.com</a></li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-pin"></i> 123 News Avenue, New York, NY 10001</li>
+                        <li><i class="fas fa-clock"></i> Mon–Fri: 8:00 AM – 10:00 PM (EST)</li>
+                    </ul>
+                    <h4>Archives</h4>
+                    <ul>
+                        <li><a href="#">2026</a> • <a href="#">2025</a> • <a href="#">2024</a></li>
+                        <li><a href="#">Special Reports</a> • <a href="#">Interviews</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom bar -->
+            <div>
+                <p>&copy; 2026 The Raptor Media Group. All rights reserved. | ISSN 2834-5678</p>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Settings</a>
+                    <a href="#">Accessibility</a>
+                    <a href="#">RSS Feed</a>
+                </div>
+            </div>
+
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
 </body>
 </html>
