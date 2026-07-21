@@ -19,36 +19,38 @@
         <div class="container">
             <div class="row align-items-center py-3">
                 <div class="col-6 col-lg-3">
-                    <a href="index.html" class="site-logo">The<span>Raptor</span></a>
+                    <a href="index.html" class="site-logo">The<span class="text-green">Raptor</span></a>
                 </div>
                 <div class="col-lg-7 d-none d-md-block">
-                    <nav id="mainNav" class="main-nav">
+                    <nav id="mainNav" class="main-nav" aria-label="Main navigation">
                         <a href="index.html" class="nav-link active">Home</a>
                         <a href="blog.html" class="nav-link">Blog</a>
                         <a href="about.html" class="nav-link">About</a>
                         <a href="contact.html" class="nav-link">Contact</a>
                         <!-- Search input directly in navbar -->
                         <div class="search-nav-item">
-                            <input type="text" id="navSearchInput" class="form-control form-control-sm" placeholder="Search articles..." />
-                            <button id="navSearchBtn" class="btn btn-sm btn-primary"><i class="fas fa-search"></i></button>
+                            <label for="navSearchInput" class="visually-hidden">Search articles</label>
+                            <input type="text" id="navSearchInput" class="form-control form-control-sm" placeholder="Search articles..." aria-label="Search articles" />
+                            <button id="navSearchBtn" class="btn btn-sm btn-primary" aria-label="Submit search"><i class="fas fa-search"></i></button>
                         </div>
                     </nav>
                 </div>
                 <div class="col-6 col-lg-2 text-end">
-                    <button id="darkModeToggle" class="btn btn-outline-primary btn-sm me-2"><i class="fas fa-moon"></i></button>
-                    <button id="mobileMenuToggle" class="btn btn-outline-secondary btn-sm d-md-none"><i class="fas fa-bars"></i></button>
+                    <button id="darkModeToggle" class="btn btn-outline-primary btn-sm me-2" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+                    <button id="mobileMenuToggle" class="btn btn-outline-secondary btn-sm d-md-none" aria-label="Toggle mobile navigation"><i class="fas fa-bars"></i></button>
                 </div>
             </div>
             <!-- Mobile Nav -->
             <div id="mobileNav" class="d-md-none" style="display:none;">
-                <nav class="mobile-nav py-3">
+                <nav class="mobile-nav py-3" aria-label="Mobile navigation">
                     <a href="index.html" class="nav-link active">Home</a>
                     <a href="blog.html" class="nav-link">Blog</a>
                     <a href="about.html" class="nav-link">About</a>
                     <a href="contact.html" class="nav-link">Contact</a>
                     <div class="search-mobile mt-2">
-                        <input type="text" id="mobileSearchInput" class="form-control form-control-sm" placeholder="Search articles..." />
-                        <button id="mobileSearchBtn" class="btn btn-sm btn-primary mt-1"><i class="fas fa-search"></i> Search</button>
+                        <label for="mobileSearchInput" class="visually-hidden">Search articles</label>
+                        <input type="text" id="mobileSearchInput" class="form-control form-control-sm" placeholder="Search articles..." aria-label="Search articles" />
+                        <button id="mobileSearchBtn" class="btn btn-sm btn-primary mt-1" aria-label="Submit mobile search"><i class="fas fa-search"></i> Search</button>
                     </div>
                 </nav>
             </div>
@@ -60,14 +62,10 @@
     <!-- ===== HERO / BREAKING + FEATURED ===== -->
     <section id="homeHero" class="py-5">
         <div class="container">
-            <div class="breaking-news bg-light p-2 rounded-3 mb-4">
+            <div class="breaking-news bg-light p-2 rounded-3 mb-4" aria-live="polite">
                 <span class="badge bg-danger me-2"><i class="fas fa-bolt"></i> Breaking</span>
                 <span id="breakingText">
-                    <strong>Just now:</strong> City Council Approves New Park Renovation – <a href="blog.html">Read more</a>
-                    &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <strong>2 min ago:</strong> Oil Prices Drop to 6-Month Low – <a href="blog.html">Markets react</a>
-                    &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <strong>15 min ago:</strong> NASA Announces New Mars Mission Timeline – <a href="blog.html">Details inside</a>
+                    <!-- Dynamically populated by script.js -->
                 </span>
             </div>
 
@@ -89,8 +87,8 @@
                         <li><i class="fas fa-check-circle text-green"></i> Mandatory reforestation commitments</li>
                     </ul>
                     <a href="blog.html" class="btn btn-primary">Read full story →</a>
-                    <a href="#" class="btn btn-outline-secondary ms-2"><i class="fas fa-share-alt"></i> Share</a>
-                    <a href="#" class="btn btn-outline-secondary"><i class="fas fa-bookmark"></i> Save</a>
+                    <a href="#" class="btn btn-outline-secondary ms-2" aria-label="Share"><i class="fas fa-share-alt"></i> Share</a>
+                    <a href="#" class="btn btn-outline-secondary" aria-label="Save"><i class="fas fa-bookmark"></i> Save</a>
                 </div>
             </div>
         </div>
@@ -108,8 +106,222 @@
                 </div>
             </div>
             <div class="row g-4" id="latestArticlesContainer">
-                <!-- Dynamically populated by script.js -->
+                <!-- Loading spinner -->
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-primary" role="status" aria-label="Loading latest stories">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ===== CATEGORIES ===== -->
+    <section id="categoriesSection" class="py-5">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col text-center">
+                    <h2 class="fw-bold">Explore <span class="text-green">Categories</span></h2>
+                    <p class="text-muted">Find the topics that matter to you</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-3 col-6">
+                    <a href="blog.html?category=world" class="card border-0 shadow-sm text-center p-3 h-100 text-decoration-none text-reset">
+                        <i class="fas fa-globe-americas text-primary fs-1"></i>
+                        <h5 class="fw-bold mt-2">World News</h5>
+                        <span class="text-muted small">126 articles</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="blog.html?category=technology" class="card border-0 shadow-sm text-center p-3 h-100 text-decoration-none text-reset">
+                        <i class="fas fa-microchip text-green fs-1"></i>
+                        <h5 class="fw-bold mt-2">Technology</h5>
+                        <span class="text-muted small">98 articles</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="blog.html?category=business" class="card border-0 shadow-sm text-center p-3 h-100 text-decoration-none text-reset">
+                        <i class="fas fa-chart-pie text-primary fs-1"></i>
+                        <h5 class="fw-bold mt-2">Business</h5>
+                        <span class="text-muted small">74 articles</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="blog.html?category=sports" class="card border-0 shadow-sm text-center p-3 h-100 text-decoration-none text-reset">
+                        <i class="fas fa-football-ball text-green fs-1"></i>
+                        <h5 class="fw-bold mt-2">Sports</h5>
+                        <span class="text-muted small">52 articles</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="blog.html?category=culture" class="card border-0 shadow-sm text-center p-3 h-100 text-decoration-none text-reset">
+                        <i class="fas fa-paint-brush text-primary fs-1"></i>
+                        <h5 class="fw-bold mt-2">Culture</h5>
+                        <span class="text-muted small">43 articles</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="blog.html?category=science" class="card border-0 shadow-sm text-center p-3 h-100 text-decoration-none text-reset">
+                        <i class="fas fa-flask text-green fs-1"></i>
+                        <h5 class="fw-bold mt-2">Science</h5>
+                        <span class="text-muted small">38 articles</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="blog.html?category=health" class="card border-0 shadow-sm text-center p-3 h-100 text-decoration-none text-reset">
+                        <i class="fas fa-heartbeat text-primary fs-1"></i>
+                        <h5 class="fw-bold mt-2">Health</h5>
+                        <span class="text-muted small">31 articles</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="blog.html?category=travel" class="card border-0 shadow-sm text-center p-3 h-100 text-decoration-none text-reset">
+                        <i class="fas fa-plane text-green fs-1"></i>
+                        <h5 class="fw-bold mt-2">Travel</h5>
+                        <span class="text-muted small">27 articles</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TRENDING NOW ===== -->
+    <section id="trendingSection" class="py-5 bg-light">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h2 class="fw-bold">Trending <span class="text-green">Now</span></h2>
+                    <span class="text-muted">Most discussed stories today</span>
+                </div>
+            </div>
+            <div class="row g-4" id="trendingContainer">
+                <!-- Loading spinner -->
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-primary" role="status" aria-label="Loading trending stories">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEWSLETTER ===== -->
+    <section id="newsletterSection" class="py-5" style="background: linear-gradient(135deg, #1a5276, #1e8449);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center text-white">
+                    <h2 class="fw-bold">Subscribe to <span style="opacity:0.9;">The Raptor</span> Daily</h2>
+                    <p>Join over 250,000 readers who start their morning with our curated briefing. Get the top 5 stories, exclusive insights, and a weekly deep‑dive — all free.</p>
+                    <div id="newsletterFormContainer">
+                        <form id="newsletterForm" class="row g-3 justify-content-center mt-3" novalidate>
+                            <div class="col-md-4">
+                                <label for="newsletterEmail" class="visually-hidden">Email address</label>
+                                <input type="email" id="newsletterEmail" class="form-control" placeholder="Email address" required aria-required="true" />
+                                <div class="invalid-feedback">Please enter a valid email address.</div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="newsletterFrequency" class="visually-hidden">Frequency</label>
+                                <select id="newsletterFrequency" class="form-select">
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="weekend">Weekend</option>
+                                </select>
+                            </div>
+                            <div class="col-md-auto">
+                                <button type="submit" class="btn btn-light"><i class="fas fa-envelope"></i> Subscribe</button>
+                            </div>
+                        </form>
+                        <div id="newsletterSuccess" class="alert alert-success mt-3 d-none" role="alert">
+                            <i class="fas fa-check-circle"></i> Thank you! You’re now subscribed.
+                        </div>
+                    </div>
+                    <div class="mt-3 d-flex flex-wrap justify-content-center gap-3">
+                        <span><i class="fas fa-check-circle"></i> No spam</span>
+                        <span><i class="fas fa-lock"></i> Secure</span>
+                        <span><i class="fas fa-star"></i> 250k+ readers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer id="mainFooter" class="py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <a href="index.html" class="site-logo text-white">The<span class="text-green">Raptor</span></a>
+                    <p class="text-muted small mt-2">Independent, fact‑based journalism since 2012. Our team of 45 journalists operates across 20 countries.</p>
+                    <div>
+                        <a href="#" class="text-muted me-2" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-muted me-2" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-muted me-2" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="text-muted me-2" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-muted" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="fw-bold">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-muted text-decoration-none">Homepage</a></li>
+                        <li><a href="blog.html" class="text-muted text-decoration-none">All Articles</a></li>
+                        <li><a href="about.html" class="text-muted text-decoration-none">Our Team</a></li>
+                        <li><a href="contact.html" class="text-muted text-decoration-none">Contact Us</a></li>
+                        <li><a href="coming-soon.html" class="text-muted text-decoration-none">Advertise</a></li>
+                        <li><a href="coming-soon.html" class="text-muted text-decoration-none">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="fw-bold">Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="blog.html?category=world" class="text-muted text-decoration-none">World</a> (126)</li>
+                        <li><a href="blog.html?category=technology" class="text-muted text-decoration-none">Technology</a> (98)</li>
+                        <li><a href="blog.html?category=business" class="text-muted text-decoration-none">Business</a> (74)</li>
+                        <li><a href="blog.html?category=sports" class="text-muted text-decoration-none">Sports</a> (52)</li>
+                        <li><a href="blog.html?category=culture" class="text-muted text-decoration-none">Culture</a> (43)</li>
+                        <li><a href="blog.html?category=science" class="text-muted text-decoration-none">Science</a> (38)</li>
+                        <li><a href="blog.html?category=health" class="text-muted text-decoration-none">Health</a> (31)</li>
+                        <li><a href="blog.html?category=travel" class="text-muted text-decoration-none">Travel</a> (27)</li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="fw-bold">Get in Touch</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope text-muted"></i> <a href="mailto:info@theraptor.com" class="text-muted text-decoration-none">info@theraptor.com</a></li>
+                        <li><i class="fas fa-phone text-muted"></i> <span class="text-muted">+1 (555) 123-4567</span></li>
+                        <li><i class="fas fa-map-pin text-muted"></i> <span class="text-muted">123 News Avenue, NY</span></li>
+                        <li><i class="fas fa-clock text-muted"></i> <span class="text-muted">Mon–Fri: 8AM–10PM</span></li>
+                    </ul>
+                    <h5 class="fw-bold mt-3">Archives</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="coming-soon.html" class="text-muted text-decoration-none">2026</a> • <a href="coming-soon.html" class="text-muted text-decoration-none">2025</a> • <a href="coming-soon.html" class="text-muted text-decoration-none">2024</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary" />
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-muted small mb-0">&copy; 2026 The Raptor Media Group. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="coming-soon.html" class="text-muted small text-decoration-none me-2">Privacy</a>
+                    <a href="coming-soon.html" class="text-muted small text-decoration-none me-2">Terms</a>
+                    <a href="coming-soon.html" class="text-muted small text-decoration-none me-2">Cookie Settings</a>
+                    <a href="coming-soon.html" class="text-muted small text-decoration-none me-2">Accessibility</a>
+                    <a href="coming-soon.html" class="text-muted small text-decoration-none">RSS</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Your main JavaScript file -->
+    <script src="js/script.js"></script>
+</body>
+</html>
         </div>
     </section>
 
