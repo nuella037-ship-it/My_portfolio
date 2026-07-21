@@ -7,7 +7,55 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .site-logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: #212529;
+        }
+        .site-logo span {
+            color: #1e8449;
+        }
+        .text-green {
+            color: #1e8449;
+        }
+        .bg-green {
+            background-color: #1e8449;
+        }
+        .list-group-item {
+            border-left: 4px solid #1a5276;
+        }
+        .list-group-item .badge {
+            margin-left: 0.5rem;
+        }
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1060;
+        }
+        .toast {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 0.5rem;
+            min-width: 250px;
+            border-left: 4px solid #1e8449;
+            display: none;
+        }
+        .toast.error {
+            border-left-color: #dc3545;
+        }
+    </style>
 </head>
 <body>
 
@@ -30,7 +78,7 @@
             <div class="row">
                 <div class="col-lg-8 mx-auto">
                     <h1 class="fw-bold">Dashboard <span class="text-green">Articles</span></h1>
-                    <p class="text-muted">Add, edit, or delete articles. They are stored in your browser's local storage.</p>
+                    <p class="text-muted">Add, edit, or delete articles. They are stored in the Supabase cloud database.</p>
 
                     <!-- Add Article Form -->
                     <div class="card border-0 shadow-sm p-4 mb-4">
@@ -54,11 +102,11 @@
                                     <input type="text" id="articleAuthor" class="form-control" required />
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">Date</label>
+                                    <label class="form-label">Date (optional)</label>
                                     <input type="date" id="articleDate" class="form-control" />
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">Image URL</label>
+                                    <label class="form-label">Image URL (optional)</label>
                                     <input type="text" id="articleImage" class="form-control" placeholder="https://example.com/image.jpg" />
                                 </div>
                                 <div class="col-md-6">
@@ -71,6 +119,7 @@
                                 </div>
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add Article</button>
+                                    <span id="formStatus" class="text-muted ms-2"></span>
                                 </div>
                             </div>
                         </form>
@@ -81,6 +130,7 @@
                         <h4 class="fw-bold">Manage Articles</h4>
                         <div id="adminArticleList" class="list-group">
                             <!-- Populated by JS -->
+                            <div class="text-muted">Loading articles...</div>
                         </div>
                     </div>
                 </div>
@@ -88,33 +138,152 @@
         </div>
     </section>
 
+    <!-- Toast notifications -->
+    <div class="toast-container">
+        <div id="toastMessage" class="toast">Success!</div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
+
     <script>
-        // Admin-specific functions
+        // ============================================================
+        //  SUPABASE CONFIG – REPLACE THESE WITH YOUR ACTUAL KEYS
+        // ============================================================
+        const SUPABASE_URL = "YOUR_SUPABASE_URL";
+        const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+
+        // Initialize Supabase client
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // ============================================================
+        //  ADMIN FUNCTIONS
+        // ============================================================
+
+        // Load articles and render the list
+        async function loadAdminArticles() {
+            const container = document.getElementById('adminArticleList');
+            if (!container) return;
+
+            try {
+                const { data, error } = await supabase
+                    .from('articles')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                if (!data || data.length === 0) {
+                    container.innerHTML = '<div class="text-muted">No articles yet. Add one above.</div>';
+                    return;
+                }
+
+                let html = '';
+                data.forEach(article => {
+                    html += `
+                        <div class="list-group-item d-flex justify-content-between align-items-start">
+                            <div>
+                                <strong>${article.title}</strong> <span class="badge bg-primary">${article.category}</span>
+                                <br /><small class="text-muted">${article.author || 'Editor'} • ${article.date || new Date(article.created_at).toLocaleDateString()}</small>
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteArticle('${article.id}')"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            } catch (err) {
+                console.error('Failed to load articles:', err);
+                container.innerHTML = '<div class="text-danger">Error loading articles. Check console.</div>';
+            }
+        }
+
+        // Add a new article
+        async function addArticle(articleData) {
+            try {
+                const { data, error } = await supabase
+                    .from('articles')
+                    .insert([articleData])
+                    .select();
+
+                if (error) throw error;
+                showToast('Article published successfully!', 'success');
+                return data;
+            } catch (err) {
+                console.error('Add error:', err);
+                showToast('Failed to add article: ' + err.message, 'error');
+                throw err;
+            }
+        }
+
+        // Delete an article
+        window.deleteArticle = async function(id) {
+            if (!confirm('Delete this article permanently?')) return;
+
+            try {
+                const { error } = await supabase
+                    .from('articles')
+                    .delete()
+                    .eq('id', id);
+
+                if (error) throw error;
+                showToast('Article deleted.', 'success');
+                loadAdminArticles(); // refresh list
+            } catch (err) {
+                console.error('Delete error:', err);
+                showToast('Failed to delete: ' + err.message, 'error');
+            }
+        };
+
+        // Toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toastMessage');
+            toast.textContent = message;
+            toast.className = 'toast';
+            if (type === 'error') toast.classList.add('error');
+            toast.style.display = 'block';
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => {
+                toast.style.display = 'none';
+            }, 4000);
+        }
+
+        // ============================================================
+        //  FORM HANDLER
+        // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Load articles from localStorage
+            // Load initial list
             loadAdminArticles();
 
-            // Form submission
-            document.getElementById('articleForm').addEventListener('submit', function(e) {
+            const form = document.getElementById('articleForm');
+            const statusSpan = document.getElementById('formStatus');
+
+            form.addEventListener('submit', async function(e) {
                 e.preventDefault();
+                const submitBtn = this.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                statusSpan.textContent = 'Saving...';
+
+                // Gather data
                 const title = document.getElementById('articleTitle').value.trim();
                 const category = document.getElementById('articleCategory').value.trim();
                 const content = document.getElementById('articleContent').value.trim();
                 const author = document.getElementById('articleAuthor').value.trim();
                 const date = document.getElementById('articleDate').value || new Date().toISOString().split('T')[0];
-                const image = document.getElementById('articleImage').value.trim() || 'https://picsum.photos/seed/' + title.replace(/\s/g,'') + '/600/300';
-                const tags = document.getElementById('articleTags').value.split(',').map(s => s.trim()).filter(Boolean);
+                const image = document.getElementById('articleImage').value.trim() || null;
+                const tagsRaw = document.getElementById('articleTags').value.trim();
+                const tags = tagsRaw ? tagsRaw.split(',').map(s => s.trim()).filter(Boolean) : [];
                 const readTime = document.getElementById('articleReadTime').value.trim() || '4 min read';
 
+                // Validation
                 if (!title || !category || !content || !author) {
                     alert('Please fill in all required fields (Title, Category, Content, Author)');
+                    submitBtn.disabled = false;
+                    statusSpan.textContent = '';
                     return;
                 }
 
                 const newArticle = {
-                    id: Date.now().toString(),
                     title,
                     category,
                     content,
@@ -124,53 +293,26 @@
                     tags,
                     readTime,
                     comments: 0,
-                    timeAgo: 'Just now',
                     shares: 0,
-                    excerpt: content.substring(0, 120) + '…'
+                    excerpt: content.substring(0, 120) + '…',
+                    // created_at will be set by Supabase default (now())
                 };
 
-                let articles = JSON.parse(localStorage.getItem('raptor_articles') || '[]');
-                articles.unshift(newArticle);
-                localStorage.setItem('raptor_articles', JSON.stringify(articles));
-                loadAdminArticles();
-                this.reset();
-                // Also refresh the main site's article data (but we'll reload on page visit)
-                alert('Article added successfully!');
+                try {
+                    const result = await addArticle(newArticle);
+                    if (result) {
+                        form.reset();
+                        loadAdminArticles(); // refresh list
+                        statusSpan.textContent = '✅ Added!';
+                        setTimeout(() => statusSpan.textContent = '', 3000);
+                    }
+                } catch (err) {
+                    // error already shown via toast
+                } finally {
+                    submitBtn.disabled = false;
+                }
             });
         });
-
-        function loadAdminArticles() {
-            const container = document.getElementById('adminArticleList');
-            const articles = JSON.parse(localStorage.getItem('raptor_articles') || '[]');
-            if (articles.length === 0) {
-                container.innerHTML = '<div class="text-muted">No articles yet. Add one above.</div>';
-                return;
-            }
-            let html = '';
-            articles.forEach((article, index) => {
-                html += `
-                    <div class="list-group-item d-flex justify-content-between align-items-start">
-                        <div>
-                            <strong>${article.title}</strong> <span class="badge bg-primary">${article.category}</span>
-                            <br /><small class="text-muted">${article.author} • ${article.date}</small>
-                        </div>
-                        <div>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteArticle('${article.id}')"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-        }
-
-        function deleteArticle(id) {
-            if (!confirm('Delete this article?')) return;
-            let articles = JSON.parse(localStorage.getItem('raptor_articles') || '[]');
-            articles = articles.filter(a => a.id !== id);
-            localStorage.setItem('raptor_articles', JSON.stringify(articles));
-            loadAdminArticles();
-            alert('Article deleted.');
-        }
     </script>
 </body>
 </html>
