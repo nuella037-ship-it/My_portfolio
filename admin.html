@@ -7,13 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-    <!-- Supabase SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            background: #f4f6f9;
         }
         .site-logo {
             font-size: 1.6rem;
@@ -30,11 +29,58 @@
         .bg-green {
             background-color: #1e8449;
         }
+        .dashboard-card {
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: transform 0.2s;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+        }
         .list-group-item {
             border-left: 4px solid #1a5276;
+            border-radius: 8px !important;
+            margin-bottom: 6px;
         }
         .list-group-item .badge {
             margin-left: 0.5rem;
+        }
+        .list-group-item .btn-sm {
+            opacity: 0.7;
+        }
+        .list-group-item .btn-sm:hover {
+            opacity: 1;
+        }
+        .stat-box {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.2rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            transition: transform 0.2s;
+        }
+        .stat-box:hover {
+            transform: scale(1.02);
+        }
+        .stat-box .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1a5276;
+        }
+        .stat-box .label {
+            font-size: 0.8rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .unread-badge {
+            background: #dc3545;
+            color: #fff;
+            padding: 0.15rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
         }
         .toast-container {
             position: fixed;
@@ -55,34 +101,137 @@
         .toast.error {
             border-left-color: #dc3545;
         }
+        .nav-tabs .nav-link {
+            border: none;
+            border-radius: 8px;
+            padding: 0.6rem 1.2rem;
+            font-weight: 500;
+        }
+        .nav-tabs .nav-link.active {
+            background: #1a5276;
+            color: #fff;
+        }
+        .nav-tabs .nav-link:not(.active) {
+            color: #6c757d;
+        }
+        .nav-tabs .nav-link:not(.active):hover {
+            background: #e9ecef;
+        }
+        .tab-content {
+            padding-top: 1.5rem;
+        }
+        .empty-state {
+            padding: 3rem;
+            text-align: center;
+            color: #6c757d;
+        }
+        .empty-state i {
+            font-size: 3rem;
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+        .message-preview {
+            max-width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        @media (max-width: 768px) {
+            .message-preview {
+                max-width: 120px;
+            }
+        }
+        .export-btn {
+            background: #1e8449;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.4rem 1rem;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+        .export-btn:hover {
+            background: #145a32;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Simple header for admin -->
-    <header class="site-header">
+    <!-- ===== HEADER ===== -->
+    <header class="site-header bg-white border-bottom py-2">
         <div class="container">
-            <div class="row align-items-center py-3">
-                <div class="col-6">
+            <div class="row align-items-center">
+                <div class="col-6 col-lg-3">
                     <a href="index.html" class="site-logo">The<span>Raptor</span></a>
                 </div>
-                <div class="col-6 text-end">
-                    <a href="index.html" class="btn btn-outline-primary btn-sm"><i class="fas fa-home"></i> Home</a>
+                <div class="col-6 col-lg-9 text-end">
+                    <a href="index.html" class="btn btn-outline-primary btn-sm me-2"><i class="fas fa-home"></i> Home</a>
+                    <span class="text-muted small d-none d-md-inline">| Admin Panel</span>
                 </div>
             </div>
         </div>
     </header>
 
-    <section class="py-5">
+    <!-- ===== DASHBOARD ===== -->
+    <section class="py-4">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <h1 class="fw-bold">Dashboard <span class="text-green">Articles</span></h1>
-                    <p class="text-muted">Add, edit, or delete articles. They are stored in the Supabase cloud database.</p>
+
+            <!-- Stats Row -->
+            <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3">
+                    <div class="stat-box">
+                        <div class="number" id="totalArticles">0</div>
+                        <div class="label">Articles</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-box">
+                        <div class="number" id="totalMessages">0</div>
+                        <div class="label">Messages</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-box">
+                        <div class="number" id="unreadMessages">0</div>
+                        <div class="label">Unread</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-box">
+                        <div class="number" id="totalSubscribers">0</div>
+                        <div class="label">Subscribers</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <ul class="nav nav-tabs" id="adminTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="articles-tab" data-bs-toggle="tab" data-bs-target="#articles" type="button" role="tab">
+                        <i class="fas fa-newspaper"></i> Articles
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab">
+                        <i class="fas fa-inbox"></i> Messages <span id="unreadBadge" class="unread-badge ms-1" style="display:none;">0</span>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="subscribers-tab" data-bs-toggle="tab" data-bs-target="#subscribers" type="button" role="tab">
+                        <i class="fas fa-envelope"></i> Subscribers
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="adminTabContent">
+
+                <!-- ===== TAB 1: ARTICLES ===== -->
+                <div class="tab-pane fade show active" id="articles" role="tabpanel">
 
                     <!-- Add Article Form -->
-                    <div class="card border-0 shadow-sm p-4 mb-4">
-                        <h4 class="fw-bold">Add New Article</h4>
+                    <div class="card dashboard-card p-4 mb-4">
+                        <h4 class="fw-bold mb-3"><i class="fas fa-plus-circle text-green"></i> Add New Article</h4>
                         <form id="articleForm">
                             <div class="row g-3">
                                 <div class="col-md-6">
@@ -126,14 +275,54 @@
                     </div>
 
                     <!-- Article List -->
-                    <div class="card border-0 shadow-sm p-4">
-                        <h4 class="fw-bold">Manage Articles</h4>
+                    <div class="card dashboard-card p-4">
+                        <h4 class="fw-bold mb-3"><i class="fas fa-list text-green"></i> Manage Articles</h4>
                         <div id="adminArticleList" class="list-group">
-                            <!-- Populated by JS -->
                             <div class="text-muted">Loading articles...</div>
                         </div>
                     </div>
                 </div>
+
+                <!-- ===== TAB 2: MESSAGES ===== -->
+                <div class="tab-pane fade" id="messages" role="tabpanel">
+                    <div class="card dashboard-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+                            <h4 class="fw-bold mb-0"><i class="fas fa-inbox text-green"></i> Contact Messages</h4>
+                            <div>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="markAllRead()">
+                                    <i class="fas fa-check-double"></i> Mark all read
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger ms-2" onclick="deleteAllMessages()">
+                                    <i class="fas fa-trash"></i> Delete all
+                                </button>
+                            </div>
+                        </div>
+                        <div id="adminMessageList" class="list-group">
+                            <div class="text-muted">Loading messages...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== TAB 3: SUBSCRIBERS ===== -->
+                <div class="tab-pane fade" id="subscribers" role="tabpanel">
+                    <div class="card dashboard-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+                            <h4 class="fw-bold mb-0"><i class="fas fa-envelope text-green"></i> Newsletter Subscribers</h4>
+                            <div>
+                                <button class="export-btn" onclick="exportSubscribers()">
+                                    <i class="fas fa-download"></i> Export CSV
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger ms-2" onclick="deleteAllSubscribers()">
+                                    <i class="fas fa-trash"></i> Delete all
+                                </button>
+                            </div>
+                        </div>
+                        <div id="adminSubscriberList" class="list-group">
+                            <div class="text-muted">Loading subscribers...</div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -147,25 +336,41 @@
 
     <script>
         // ============================================================
-        //  SUPABASE CONFIG – REPLACE THESE WITH YOUR ACTUAL KEYS
+        //  SUPABASE CONFIG (uses the global supabaseClient from script.js)
         // ============================================================
-        const SUPABASE_URL = "https://aslkopamkdnvofjqzgjz.supabase.co";
-        const SUPABASE_ANON_KEY = "sb_publishable_yZ8KyiOxJT3GBR_6wX1Plw_Yt_5IQ6f";
+        // The supabaseClient is already initialized in script.js
+        // If script.js is not loaded, fallback:
+        let supabaseClient = window.supabaseClient;
 
-        // Initialize Supabase client
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        if (!supabaseClient) {
+            // Fallback for admin page if script.js not loaded
+            const SUPABASE_URL = "YOUR_SUPABASE_URL";
+            const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            window.supabaseClient = supabaseClient;
+        }
 
         // ============================================================
-        //  ADMIN FUNCTIONS
+        //  LOAD ALL DATA
         // ============================================================
+        async function loadAllAdminData() {
+            await Promise.all([
+                loadAdminArticles(),
+                loadAdminMessages(),
+                loadAdminSubscribers(),
+                updateStats()
+            ]);
+        }
 
-        // Load articles and render the list
+        // ============================================================
+        //  ARTICLES (existing functions)
+        // ============================================================
         async function loadAdminArticles() {
             const container = document.getElementById('adminArticleList');
             if (!container) return;
 
             try {
-                const { data, error } = await supabase
+                const { data, error } = await supabaseClient
                     .from('articles')
                     .select('*')
                     .order('created_at', { ascending: false });
@@ -194,48 +399,356 @@
                 container.innerHTML = html;
             } catch (err) {
                 console.error('Failed to load articles:', err);
-                container.innerHTML = '<div class="text-danger">Error loading articles. Check console.</div>';
+                container.innerHTML = '<div class="text-danger">Error loading articles.</div>';
             }
         }
 
-        // Add a new article
-        async function addArticle(articleData) {
-            try {
-                const { data, error } = await supabase
-                    .from('articles')
-                    .insert([articleData])
-                    .select();
-
-                if (error) throw error;
-                showToast('Article published successfully!', 'success');
-                return data;
-            } catch (err) {
-                console.error('Add error:', err);
-                showToast('Failed to add article: ' + err.message, 'error');
-                throw err;
-            }
-        }
-
-        // Delete an article
         window.deleteArticle = async function(id) {
             if (!confirm('Delete this article permanently?')) return;
-
             try {
-                const { error } = await supabase
-                    .from('articles')
-                    .delete()
-                    .eq('id', id);
-
+                const { error } = await supabaseClient.from('articles').delete().eq('id', id);
                 if (error) throw error;
                 showToast('Article deleted.', 'success');
-                loadAdminArticles(); // refresh list
+                loadAllAdminData();
             } catch (err) {
-                console.error('Delete error:', err);
                 showToast('Failed to delete: ' + err.message, 'error');
             }
         };
 
-        // Toast notification
+        // Article form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('articleForm');
+            if (!form) return;
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const submitBtn = this.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                document.getElementById('formStatus').textContent = 'Saving...';
+
+                const title = document.getElementById('articleTitle').value.trim();
+                const category = document.getElementById('articleCategory').value.trim();
+                const content = document.getElementById('articleContent').value.trim();
+                const author = document.getElementById('articleAuthor').value.trim();
+                const date = document.getElementById('articleDate').value || new Date().toISOString().split('T')[0];
+                const image = document.getElementById('articleImage').value.trim() || null;
+                const tagsRaw = document.getElementById('articleTags').value.trim();
+                const tags = tagsRaw ? tagsRaw.split(',').map(s => s.trim()).filter(Boolean) : [];
+                const readTime = document.getElementById('articleReadTime').value.trim() || '4 min read';
+
+                if (!title || !category || !content || !author) {
+                    alert('Please fill in all required fields (Title, Category, Content, Author)');
+                    submitBtn.disabled = false;
+                    document.getElementById('formStatus').textContent = '';
+                    return;
+                }
+
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('articles')
+                        .insert([{
+                            title,
+                            category,
+                            content,
+                            author,
+                            date,
+                            image,
+                            tags,
+                            readTime,
+                            comments: 0,
+                            shares: 0,
+                            excerpt: content.substring(0, 120) + '…'
+                        }])
+                        .select();
+
+                    if (error) throw error;
+                    showToast('Article published!', 'success');
+                    form.reset();
+                    loadAllAdminData();
+                    document.getElementById('formStatus').textContent = '✅ Added!';
+                    setTimeout(() => document.getElementById('formStatus').textContent = '', 3000);
+                } catch (err) {
+                    showToast('Failed to add: ' + err.message, 'error');
+                } finally {
+                    submitBtn.disabled = false;
+                }
+            });
+        });
+
+        // ============================================================
+        //  MESSAGES
+        // ============================================================
+        async function loadAdminMessages() {
+            const container = document.getElementById('adminMessageList');
+            if (!container) return;
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('contact_messages')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                if (!data || data.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <p>No messages yet.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let html = '';
+                data.forEach(msg => {
+                    const isUnread = !msg.is_read;
+                    html += `
+                        <div class="list-group-item d-flex justify-content-between align-items-start ${isUnread ? 'border-left-danger' : ''}" style="${isUnread ? 'border-left-color: #dc3545;' : ''}">
+                            <div class="flex-grow-1">
+                                <div class="d-flex flex-wrap align-items-center gap-2">
+                                    <strong>${msg.name}</strong>
+                                    <span class="badge bg-primary">${msg.subject || 'General'}</span>
+                                    ${isUnread ? '<span class="unread-badge">Unread</span>' : ''}
+                                </div>
+                                <div class="text-muted small">
+                                    <i class="fas fa-envelope"></i> ${msg.email}
+                                    ${msg.phone ? `• <i class="fas fa-phone"></i> ${msg.phone}` : ''}
+                                    • ${new Date(msg.created_at).toLocaleString()}
+                                </div>
+                                <div class="message-preview text-muted small mt-1">${msg.message}</div>
+                            </div>
+                            <div class="d-flex gap-1 flex-shrink-0">
+                                ${isUnread ? `<button class="btn btn-sm btn-outline-success" onclick="markMessageRead('${msg.id}')"><i class="fas fa-check"></i></button>` : ''}
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteMessage('${msg.id}')"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            } catch (err) {
+                console.error('Failed to load messages:', err);
+                container.innerHTML = '<div class="text-danger">Error loading messages.</div>';
+            }
+        }
+
+        window.markMessageRead = async function(id) {
+            try {
+                const { error } = await supabaseClient
+                    .from('contact_messages')
+                    .update({ is_read: true })
+                    .eq('id', id);
+                if (error) throw error;
+                loadAllAdminData();
+                showToast('Marked as read.', 'success');
+            } catch (err) {
+                showToast('Failed to update: ' + err.message, 'error');
+            }
+        };
+
+        window.markAllRead = async function() {
+            if (!confirm('Mark all messages as read?')) return;
+            try {
+                const { error } = await supabaseClient
+                    .from('contact_messages')
+                    .update({ is_read: true })
+                    .eq('is_read', false);
+                if (error) throw error;
+                loadAllAdminData();
+                showToast('All messages marked as read.', 'success');
+            } catch (err) {
+                showToast('Failed: ' + err.message, 'error');
+            }
+        };
+
+        window.deleteMessage = async function(id) {
+            if (!confirm('Delete this message?')) return;
+            try {
+                const { error } = await supabaseClient
+                    .from('contact_messages')
+                    .delete()
+                    .eq('id', id);
+                if (error) throw error;
+                loadAllAdminData();
+                showToast('Message deleted.', 'success');
+            } catch (err) {
+                showToast('Failed to delete: ' + err.message, 'error');
+            }
+        };
+
+        window.deleteAllMessages = async function() {
+            if (!confirm('Delete ALL messages? This cannot be undone.')) return;
+            try {
+                const { error } = await supabaseClient
+                    .from('contact_messages')
+                    .delete()
+                    .neq('id', 0);
+                if (error) throw error;
+                loadAllAdminData();
+                showToast('All messages deleted.', 'success');
+            } catch (err) {
+                showToast('Failed: ' + err.message, 'error');
+            }
+        };
+
+        // ============================================================
+        //  SUBSCRIBERS
+        // ============================================================
+        async function loadAdminSubscribers() {
+            const container = document.getElementById('adminSubscriberList');
+            if (!container) return;
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('newsletter_subscribers')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                if (!data || data.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-envelope"></i>
+                            <p>No subscribers yet.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let html = '';
+                data.forEach(sub => {
+                    html += `
+                        <div class="list-group-item d-flex justify-content-between align-items-start">
+                            <div>
+                                <strong>${sub.email}</strong>
+                                <span class="badge bg-green">${sub.frequency || 'daily'}</span>
+                                <br /><small class="text-muted">Subscribed: ${new Date(sub.created_at).toLocaleString()}</small>
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteSubscriber('${sub.id}')"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            } catch (err) {
+                console.error('Failed to load subscribers:', err);
+                container.innerHTML = '<div class="text-danger">Error loading subscribers.</div>';
+            }
+        }
+
+        window.deleteSubscriber = async function(id) {
+            if (!confirm('Remove this subscriber?')) return;
+            try {
+                const { error } = await supabaseClient
+                    .from('newsletter_subscribers')
+                    .delete()
+                    .eq('id', id);
+                if (error) throw error;
+                loadAllAdminData();
+                showToast('Subscriber removed.', 'success');
+            } catch (err) {
+                showToast('Failed: ' + err.message, 'error');
+            }
+        };
+
+        window.deleteAllSubscribers = async function() {
+            if (!confirm('Delete ALL subscribers? This cannot be undone.')) return;
+            try {
+                const { error } = await supabaseClient
+                    .from('newsletter_subscribers')
+                    .delete()
+                    .neq('id', 0);
+                if (error) throw error;
+                loadAllAdminData();
+                showToast('All subscribers deleted.', 'success');
+            } catch (err) {
+                showToast('Failed: ' + err.message, 'error');
+            }
+        };
+
+        window.exportSubscribers = async function() {
+            try {
+                const { data, error } = await supabaseClient
+                    .from('newsletter_subscribers')
+                    .select('email, frequency, created_at')
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                if (!data || data.length === 0) {
+                    showToast('No subscribers to export.', 'error');
+                    return;
+                }
+
+                // Create CSV
+                let csv = 'Email,Frequency,Subscribed At\n';
+                data.forEach(row => {
+                    csv += `"${row.email}","${row.frequency || 'daily'}","${new Date(row.created_at).toLocaleString()}"\n`;
+                });
+
+                // Download
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `subscribers_${new Date().toISOString().split('T')[0]}.csv`;
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast('Export successful!', 'success');
+            } catch (err) {
+                showToast('Failed to export: ' + err.message, 'error');
+            }
+        };
+
+        // ============================================================
+        //  STATS
+        // ============================================================
+        async function updateStats() {
+            try {
+                // Articles count
+                const { count: articleCount } = await supabaseClient
+                    .from('articles')
+                    .select('*', { count: 'exact', head: true });
+                document.getElementById('totalArticles').textContent = articleCount || 0;
+
+                // Messages count
+                const { count: messageCount } = await supabaseClient
+                    .from('contact_messages')
+                    .select('*', { count: 'exact', head: true });
+                document.getElementById('totalMessages').textContent = messageCount || 0;
+
+                // Unread messages count
+                const { count: unreadCount } = await supabaseClient
+                    .from('contact_messages')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('is_read', false);
+                document.getElementById('unreadMessages').textContent = unreadCount || 0;
+
+                // Update unread badge on tab
+                const badge = document.getElementById('unreadBadge');
+                if (unreadCount > 0) {
+                    badge.textContent = unreadCount;
+                    badge.style.display = 'inline';
+                } else {
+                    badge.style.display = 'none';
+                }
+
+                // Subscribers count
+                const { count: subscriberCount } = await supabaseClient
+                    .from('newsletter_subscribers')
+                    .select('*', { count: 'exact', head: true });
+                document.getElementById('totalSubscribers').textContent = subscriberCount || 0;
+
+            } catch (err) {
+                console.error('Stats error:', err);
+            }
+        }
+
+        // ============================================================
+        //  TOAST NOTIFICATIONS
+        // ============================================================
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toastMessage');
             toast.textContent = message;
@@ -249,70 +762,22 @@
         }
 
         // ============================================================
-        //  FORM HANDLER
+        //  INIT
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Load initial list
-            loadAdminArticles();
+            loadAllAdminData();
 
-            const form = document.getElementById('articleForm');
-            const statusSpan = document.getElementById('formStatus');
-
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                const submitBtn = this.querySelector('button[type="submit"]');
-                submitBtn.disabled = true;
-                statusSpan.textContent = 'Saving...';
-
-                // Gather data
-                const title = document.getElementById('articleTitle').value.trim();
-                const category = document.getElementById('articleCategory').value.trim();
-                const content = document.getElementById('articleContent').value.trim();
-                const author = document.getElementById('articleAuthor').value.trim();
-                const date = document.getElementById('articleDate').value || new Date().toISOString().split('T')[0];
-                const image = document.getElementById('articleImage').value.trim() || null;
-                const tagsRaw = document.getElementById('articleTags').value.trim();
-                const tags = tagsRaw ? tagsRaw.split(',').map(s => s.trim()).filter(Boolean) : [];
-                const readTime = document.getElementById('articleReadTime').value.trim() || '4 min read';
-
-                // Validation
-                if (!title || !category || !content || !author) {
-                    alert('Please fill in all required fields (Title, Category, Content, Author)');
-                    submitBtn.disabled = false;
-                    statusSpan.textContent = '';
-                    return;
-                }
-
-                const newArticle = {
-                    title,
-                    category,
-                    content,
-                    author,
-                    date,
-                    image,
-                    tags,
-                    readTime,
-                    comments: 0,
-                    shares: 0,
-                    excerpt: content.substring(0, 120) + '…',
-                    // created_at will be set by Supabase default (now())
-                };
-
-                try {
-                    const result = await addArticle(newArticle);
-                    if (result) {
-                        form.reset();
-                        loadAdminArticles(); // refresh list
-                        statusSpan.textContent = '✅ Added!';
-                        setTimeout(() => statusSpan.textContent = '', 3000);
-                    }
-                } catch (err) {
-                    // error already shown via toast
-                } finally {
-                    submitBtn.disabled = false;
-                }
+            // Auto-refresh messages tab when clicked
+            document.querySelector('[data-bs-target="#messages"]')?.addEventListener('click', function() {
+                loadAdminMessages();
+                updateStats();
+            });
+            document.querySelector('[data-bs-target="#subscribers"]')?.addEventListener('click', function() {
+                loadAdminSubscribers();
+                updateStats();
             });
         });
     </script>
+
 </body>
 </html>
