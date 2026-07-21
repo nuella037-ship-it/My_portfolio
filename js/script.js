@@ -6,8 +6,6 @@ const SUPABASE_ANON_KEY = "sb_publishable_yZ8KyiOxJT3GBR_6wX1Plw_Yt_5IQ6f";
 
 // Initialize Supabase client
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-// Make it globally available so all functions can use it
 window.supabaseClient = supabase;
 
 // ============================================
@@ -15,19 +13,18 @@ window.supabaseClient = supabase;
 // ============================================
 let currentCategory = 'all';
 let allArticles = [];
-let supabaseClient = window.supabaseClient;
 let searchTimeout = null;
 
 // ============================================
 //  FETCH ARTICLES FROM SUPABASE
 // ============================================
 async function fetchArticles(category = 'all') {
-    if (!supabaseClient) {
+    if (!window.supabaseClient) {
         console.error('Supabase client not initialized.');
         return [];
     }
     try {
-        let query = supabaseClient
+        let query = window.supabaseClient
             .from('articles')
             .select('*')
             .order('created_at', { ascending: false });
@@ -46,7 +43,7 @@ async function fetchArticles(category = 'all') {
 }
 
 // ============================================
-//  LOAD FUNCTIONS (called from HTML)
+//  LOAD FUNCTIONS (called from HTML pages)
 // ============================================
 
 // ----- Homepage: Latest Stories -----
@@ -304,7 +301,6 @@ function hideSearchResults() {
     if (container) container.style.display = 'none';
 }
 
-// Attach search events to all search inputs
 function initSearch() {
     const searchInputs = [
         document.getElementById('navSearchInput'),
@@ -372,6 +368,20 @@ function initCategoryFilters() {
             }
         });
     });
+
+    // Check for category parameter in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryParam = urlParams.get('category');
+    if (categoryParam) {
+        // Find and click the matching filter button
+        const matchingBtn = Array.from(buttons).find(btn => btn.dataset.category.toLowerCase() === categoryParam.toLowerCase());
+        if (matchingBtn) {
+            matchingBtn.click();
+        } else {
+            // If no matching button, load the category anyway
+            loadBlogArticles(categoryParam);
+        }
+    }
 }
 
 // ============================================
@@ -402,7 +412,7 @@ function initDarkMode() {
 }
 
 // ============================================
-//  MOBILE MENU TOGGLE (Improved)
+//  MOBILE MENU TOGGLE
 // ============================================
 function initMobileMenu() {
     const toggle = document.getElementById('mobileMenuToggle');
@@ -410,17 +420,14 @@ function initMobileMenu() {
 
     if (!toggle || !nav) return;
 
-    // Toggle mobile nav on button click
     toggle.addEventListener('click', function(e) {
         e.stopPropagation();
         nav.classList.toggle('open');
         const isOpen = nav.classList.contains('open');
         nav.style.display = isOpen ? 'block' : 'none';
-        // Update aria-expanded for accessibility
         this.setAttribute('aria-expanded', isOpen);
     });
 
-    // Close mobile nav when clicking a link inside it
     nav.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function() {
             nav.classList.remove('open');
@@ -429,7 +436,6 @@ function initMobileMenu() {
         });
     });
 
-    // Auto-hide on resize to desktop
     window.addEventListener('resize', function() {
         if (window.innerWidth >= 992) {
             nav.classList.remove('open');
@@ -444,7 +450,7 @@ function initMobileMenu() {
 // ============================================
 async function submitContactForm(formData) {
     try {
-        const { data, error } = await supabaseClient
+        const { data, error } = await window.supabaseClient
             .from('contact_messages')
             .insert([{
                 name: formData.name,
@@ -468,7 +474,7 @@ async function submitContactForm(formData) {
 // ============================================
 async function subscribeNewsletter(email, frequency = 'daily') {
     try {
-        const { data, error } = await supabaseClient
+        const { data, error } = await window.supabaseClient
             .from('newsletter_subscribers')
             .insert([{ email, frequency }])
             .select();
@@ -507,7 +513,6 @@ function initForms() {
             const email = emailInput.value.trim();
             const frequency = selectInput ? selectInput.value : 'daily';
 
-            // Validate email format
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 showToast('Please enter a valid email address.', 'error');
@@ -515,7 +520,6 @@ function initForms() {
                 return;
             }
 
-            // Show loading state
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             submitBtn.disabled = true;
@@ -547,7 +551,6 @@ function initForms() {
             const subject = document.getElementById('contactSubject')?.value;
             const message = document.getElementById('contactMessage')?.value.trim();
 
-            // Validation
             if (!name) {
                 showToast('Please enter your name.', 'error');
                 document.getElementById('contactName')?.focus();
@@ -577,7 +580,6 @@ function initForms() {
 
             const formData = { name, email, phone, subject, message };
 
-            // Show loading state
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             submitBtn.disabled = true;
@@ -599,10 +601,9 @@ function initForms() {
 }
 
 // ============================================
-//  TOAST NOTIFICATIONS (Replaces alert boxes)
+//  TOAST NOTIFICATIONS
 // ============================================
 function showToast(message, type = 'success') {
-    // Check if toast container exists, create if not
     let container = document.querySelector('.toast-container');
     if (!container) {
         container = document.createElement('div');
@@ -611,7 +612,6 @@ function showToast(message, type = 'success') {
         document.body.appendChild(container);
     }
 
-    // Create toast element
     const toast = document.createElement('div');
     toast.className = `toast align-items-center text-white bg-${type === 'success' ? 'success' : 'danger'} border-0 show`;
     toast.role = 'alert';
@@ -630,7 +630,6 @@ function showToast(message, type = 'success') {
 
     container.appendChild(toast);
 
-    // Auto-remove after 4 seconds
     setTimeout(() => {
         toast.style.opacity = '0';
         toast.style.transition = 'opacity 0.3s ease';
@@ -639,7 +638,6 @@ function showToast(message, type = 'success') {
         }, 300);
     }, 4000);
 
-    // Close button handler
     toast.querySelector('.btn-close')?.addEventListener('click', function() {
         toast.remove();
     });
@@ -662,15 +660,14 @@ document.addEventListener('DOMContentLoaded', function() {
     initDarkMode();
     initMobileMenu();
     initSearch();
-    initCategoryFilters();
+    initCategoryFilters();   // This now handles URL params automatically
     initForms();
 
-    // Update current year in footer
+    // Update current year in footer if element exists
     const yearSpan = document.querySelector('.current-year');
     if (yearSpan) {
         yearSpan.textContent = new Date().getFullYear();
     }
 
-    // Log successful initialization
     console.log('✅ The Raptor initialized successfully!');
 });
