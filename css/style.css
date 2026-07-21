@@ -33,7 +33,7 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: var(--white);
     color: var(--text-dark);
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color var(--transition), color var(--transition);
     line-height: 1.6;
 }
 
@@ -67,7 +67,7 @@ a {
 }
 
 .shadow-hover {
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    transition: box-shadow var(--transition), transform var(--transition);
 }
 .shadow-hover:hover {
     transform: translateY(-4px);
@@ -248,6 +248,11 @@ body.dark-mode .text-dark {
     color: #ccc !important;
 }
 
+body.dark-mode .toast {
+    background: #2d2d44 !important;
+    color: var(--text-light) !important;
+}
+
 /* ============================================================
    HEADER / NAVIGATION
    ============================================================ */
@@ -257,11 +262,11 @@ body.dark-mode .text-dark {
     position: sticky;
     top: 0;
     z-index: 1030;
-    transition: background 0.3s, border-color 0.3s;
+    transition: background var(--transition), border-color var(--transition);
 }
 body.dark-mode .site-header {
     background-color: #1a1a2e !important;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #333 !important;
 }
 
 /* --- Logo --- */
@@ -272,7 +277,7 @@ body.dark-mode .site-header {
     color: var(--text-dark);
     letter-spacing: -0.5px;
     white-space: nowrap;
-    transition: color 0.3s;
+    transition: color var(--transition);
 }
 .site-logo span {
     color: var(--green);
@@ -418,7 +423,7 @@ body.dark-mode #mobileMenuToggle:hover {
     background: #2d2d44;
 }
 
-/* --- Mobile Navigation --- */
+/* --- Mobile Navigation (class-based toggle) --- */
 #mobileNav {
     display: none;
     padding: 1rem 0;
@@ -622,7 +627,7 @@ body.dark-mode .filter-btn.btn-primary {
    ============================================================ */
 .card {
     border-radius: var(--radius);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform var(--transition), box-shadow var(--transition);
     overflow: hidden;
 }
 .card:hover {
@@ -715,6 +720,8 @@ body.dark-mode .article-category {
 @media (max-width: 575.98px) {
     #breakingText {
         animation: scrollText 30s linear infinite;
+        white-space: normal;
+        display: block;
     }
 }
 
@@ -722,13 +729,19 @@ body.dark-mode .article-category {
     0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
 }
+@media (max-width: 575.98px) {
+    @keyframes scrollText {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(0); }
+    }
+}
 
 /* ============================================================
    STATS SECTION
    ============================================================ */
 .stat-item {
     padding: 1rem;
-    transition: transform 0.3s ease;
+    transition: transform var(--transition);
 }
 .stat-item:hover {
     transform: scale(1.05);
@@ -911,6 +924,19 @@ footer .site-logo span {
     }
     .header-controls {
         justify-content: flex-end;
+    }
+}
+
+/* --- DESKTOP (992px and up) --- */
+@media (min-width: 992px) {
+    #mobileNav {
+        display: none !important;
+    }
+    #mobileNav.open {
+        display: none !important;
+    }
+    .main-nav {
+        display: flex !important;
     }
 }
 
