@@ -4,507 +4,487 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Raptor – Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-    <!-- ===== HEADER (identical to index.html) ===== -->
-    <header>
-        <div>
-            <a href="index.html">The<span>Raptor</span></a>
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="blog.html">Blog</a>
-                <a href="podcast.html">Podcast</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-                <a href="#"><i class="fas fa-search"></i> Search</a>
-            </nav>
-            <div>
-                <button><i class="fas fa-moon"></i></button>
-                <button><span></span><span></span><span></span></button>
+    <!-- ===== HEADER ===== -->
+    <header id="mainHeader" class="site-header">
+        <div class="container">
+            <div class="row align-items-center py-3">
+                <div class="col-6 col-lg-3">
+                    <a href="index.html" class="site-logo">The<span>Raptor</span></a>
+                </div>
+                <div class="col-lg-7 d-none d-lg-block">
+                    <nav id="mainNav" class="main-nav">
+                        <a href="index.html" class="nav-link">Home</a>
+                        <a href="blog.html" class="nav-link active">Blog</a>
+                        <a href="about.html" class="nav-link">About</a>
+                        <a href="contact.html" class="nav-link">Contact</a>
+                        <a href="#" class="nav-link search-trigger" id="navSearchTrigger"><i class="fas fa-search"></i> Search</a>
+                    </nav>
+                </div>
+                <div class="col-6 col-lg-2 text-end">
+                    <button id="darkModeToggle" class="btn btn-outline-primary btn-sm me-2"><i class="fas fa-moon"></i></button>
+                    <button id="mobileMenuToggle" class="btn btn-outline-secondary btn-sm d-lg-none"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
+            <div id="mobileNav" class="d-lg-none" style="display:none;">
+                <nav class="mobile-nav py-3">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="blog.html" class="nav-link active">Blog</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="#" class="nav-link search-trigger"><i class="fas fa-search"></i> Search</a>
+                </nav>
+            </div>
+            <div id="globalSearchBar" class="row" style="display:none;">
+                <div class="col-12 py-3">
+                    <div class="search-wrapper">
+                        <input type="text" id="globalSearchInput" class="form-control form-control-lg" placeholder="Search for articles, topics, or keywords..." />
+                        <button id="globalSearchClose" class="btn btn-outline-secondary"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div id="searchResults" class="search-results mt-2"></div>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- ===== BLOG HERO ===== -->
-    <section>
-        <div>
-            <div>
-                <span><i class="fas fa-blog"></i> Our blog</span>
-                <h1>All <span>Articles</span></h1>
-                <p>Deep dives, breaking news, and thought‑provoking commentary from our global team of journalists. Updated daily.</p>
-                <div>
-                    <span><i class="fas fa-file-alt"></i> 247 published stories</span>
-                    <span><i class="fas fa-user-edit"></i> 35 active contributors</span>
-                    <span><i class="fas fa-clock"></i> Last updated: 2 hours ago</span>
+    <section id="blogHero" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <span class="badge bg-primary mb-3"><i class="fas fa-blog"></i> Our blog</span>
+                    <h1 class="fw-bold">All <span class="text-green">Articles</span></h1>
+                    <p class="lead">Deep dives, breaking news, and thought‑provoking commentary from our global team of journalists. Updated daily.</p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
+                        <span class="badge bg-light text-dark p-2 border"><i class="fas fa-file-alt text-primary"></i> 247 stories</span>
+                        <span class="badge bg-light text-dark p-2 border"><i class="fas fa-user-edit text-primary"></i> 35 contributors</span>
+                        <span class="badge bg-light text-dark p-2 border"><i class="fas fa-clock text-primary"></i> Updated: 2 hours ago</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== FEATURED STORY (highlight) ===== -->
-    <section>
-        <div>
-            <div>
-                <span>Featured</span>
-                <h2>AI Breakthrough in Medical Imaging Detects Early‑Stage Cancers</h2>
-                <div>
-                    <span>By <strong>Dr. Elena Moore</strong></span>
-                    <span>•</span>
-                    <span>May 17, 2026</span>
-                    <span>•</span>
-                    <span>5 min read</span>
-                    <span>•</span>
-                    <span><i class="fas fa-comment"></i> 87 comments</span>
+    <!-- ===== FEATURED STORY ===== -->
+    <section id="featuredStory" class="py-5">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6">
+                    <img src="https://picsum.photos/seed/featured/800/500" alt="Featured" class="img-fluid rounded-3 shadow" />
                 </div>
-                <p>Researchers at Stanford have developed a new deep‑learning model that analyses MRI and CT scans with 98.7% accuracy, identifying malignancies up to 18 months earlier than traditional methods. The system has already been tested on over 50,000 patients.</p>
-                <a href="#">Read full story →</a>
-            </div>
-            <div>
-                <i class="fas fa-image"></i> <!-- placeholder for image -->
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== CATEGORY FILTER (as a list of links) ===== -->
-    <section>
-        <div>
-            <div>
-                <span>Filter by category</span>
-                <div>
-                    <a href="#">All</a>
-                    <a href="#">World</a>
-                    <a href="#">Technology</a>
-                    <a href="#">Business</a>
-                    <a href="#">Sports</a>
-                    <a href="#">Culture</a>
-                    <a href="#">Science</a>
-                    <a href="#">Health</a>
-                    <a href="#">Travel</a>
+                <div class="col-lg-6">
+                    <span class="badge bg-danger mb-2">Featured</span>
+                    <h2 class="fw-bold">AI Breakthrough in Medical Imaging Detects Early‑Stage Cancers</h2>
+                    <div class="text-muted small">
+                        By <strong>Dr. Elena Moore</strong> • May 17, 2026 • 5 min read • <i class="fas fa-comment"></i> 87 comments
+                    </div>
+                    <p>Researchers at Stanford have developed a new deep‑learning model that analyses MRI and CT scans with 98.7% accuracy, identifying malignancies up to 18 months earlier than traditional methods. The system has already been tested on over 50,000 patients.</p>
+                    <a href="#" class="btn btn-primary">Read full story →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== ARTICLE GRID (12 cards) ===== -->
-    <section>
-        <div>
-            <div>
-                <h2>Latest <span>Stories</span></h2>
-                <span>Showing 12 of 247 articles</span>
+    <!-- ===== CATEGORY FILTER ===== -->
+    <section id="categoryFilter" class="py-3 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <span class="fw-bold me-2">Filter by category:</span>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="#" class="btn btn-sm btn-primary">All</a>
+                        <a href="#" class="btn btn-sm btn-outline-primary">World</a>
+                        <a href="#" class="btn btn-sm btn-outline-primary">Technology</a>
+                        <a href="#" class="btn btn-sm btn-outline-primary">Business</a>
+                        <a href="#" class="btn btn-sm btn-outline-primary">Sports</a>
+                        <a href="#" class="btn btn-sm btn-outline-primary">Culture</a>
+                        <a href="#" class="btn btn-sm btn-outline-primary">Science</a>
+                        <a href="#" class="btn btn-sm btn-outline-primary">Health</a>
+                        <a href="#" class="btn btn-sm btn-outline-primary">Travel</a>
+                    </div>
+                </div>
             </div>
-            <div>
+        </div>
+    </section>
+
+    <!-- ===== ARTICLE GRID ===== -->
+    <section id="articleGrid" class="py-5">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h2 class="fw-bold">Latest <span class="text-green">Stories</span></h2>
+                    <span class="text-muted">Showing 12 of 247 articles</span>
+                </div>
+            </div>
+            <div class="row g-4">
                 <!-- Card 1 -->
-                <article>
-                    <span>Technology</span>
-                    <h3><a href="#">AI Breakthrough in Medical Imaging Detects Early‑Stage Cancers</a></h3>
-                    <div>
-                        <span>By <strong>Dr. Elena Moore</strong></span>
-                        <span>•</span>
-                        <span>May 17, 2026</span>
-                        <span>•</span>
-                        <span>5 min read</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <img src="https://picsum.photos/seed/ai2/600/300" class="card-img-top" alt="AI" />
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">Technology</span>
+                            <h5 class="card-title"><a href="#" class="text-decoration-none text-dark">AI Breakthrough in Medical Imaging Detects Early‑Stage Cancers</a></h5>
+                            <div class="text-muted small">By <strong>Dr. Elena Moore</strong> • May 17, 2026 • 5 min read</div>
+                            <p class="card-text mt-2">Researchers at Stanford have developed a new deep‑learning model that analyses MRI and CT scans...</p>
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span><i class="fas fa-tag"></i> AI, Healthcare</span>
+                                <span><i class="fas fa-comment"></i> 87</span>
+                                <span><i class="fas fa-clock"></i> 3 hours ago</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>Researchers at Stanford have developed a new deep‑learning model that analyses MRI and CT scans with 98.7% accuracy…</p>
-                    <div>
-                        <span><i class="fas fa-tag"></i> AI, Healthcare, Innovation</span>
-                        <span><i class="fas fa-comment"></i> 87 comments</span>
-                        <span><i class="fas fa-clock"></i> 3 hours ago</span>
-                    </div>
-                </article>
-
+                </div>
                 <!-- Card 2 -->
-                <article>
-                    <span>Business</span>
-                    <h3><a href="#">Global Markets Rally as Tech Giants Post Record Earnings</a></h3>
-                    <div>
-                        <span>By <strong>James Carter</strong></span>
-                        <span>•</span>
-                        <span>May 16, 2026</span>
-                        <span>•</span>
-                        <span>4 min read</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <img src="https://picsum.photos/seed/markets2/600/300" class="card-img-top" alt="Markets" />
+                        <div class="card-body">
+                            <span class="badge bg-green mb-2">Business</span>
+                            <h5 class="card-title"><a href="#" class="text-decoration-none text-dark">Global Markets Rally as Tech Giants Post Record Earnings</a></h5>
+                            <div class="text-muted small">By <strong>James Carter</strong> • May 16, 2026 • 4 min read</div>
+                            <p class="card-text mt-2">The S&P 500 and NASDAQ surged over 3% after Apple, Microsoft, and Nvidia reported quarterly results...</p>
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span><i class="fas fa-tag"></i> Finance, Stocks</span>
+                                <span><i class="fas fa-comment"></i> 64</span>
+                                <span><i class="fas fa-clock"></i> 5 hours ago</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>The S&P 500 and NASDAQ surged over 3% after Apple, Microsoft, and Nvidia reported quarterly results that exceeded all analyst expectations…</p>
-                    <div>
-                        <span><i class="fas fa-tag"></i> Finance, Stocks, Economy</span>
-                        <span><i class="fas fa-comment"></i> 64 comments</span>
-                        <span><i class="fas fa-clock"></i> 5 hours ago</span>
-                    </div>
-                </article>
-
+                </div>
                 <!-- Card 3 -->
-                <article>
-                    <span>Sports</span>
-                    <h3><a href="#">Champions League Final: Underdogs Stun Favourites in Extra Time</a></h3>
-                    <div>
-                        <span>By <strong>Maria Santos</strong></span>
-                        <span>•</span>
-                        <span>May 15, 2026</span>
-                        <span>•</span>
-                        <span>6 min read</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <img src="https://picsum.photos/seed/football2/600/300" class="card-img-top" alt="Football" />
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">Sports</span>
+                            <h5 class="card-title"><a href="#" class="text-decoration-none text-dark">Champions League Final: Underdogs Stun Favourites in Extra Time</a></h5>
+                            <div class="text-muted small">By <strong>Maria Santos</strong> • May 15, 2026 • 6 min read</div>
+                            <p class="card-text mt-2">In one of the most dramatic finals in recent memory, Borussia Dortmund defeated Real Madrid 3–2...</p>
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span><i class="fas fa-tag"></i> Football, UEFA</span>
+                                <span><i class="fas fa-comment"></i> 213</span>
+                                <span><i class="fas fa-clock"></i> 1 day ago</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>In one of the most dramatic finals in recent memory, Borussia Dortmund defeated Real Madrid 3–2 with a 118th‑minute header from captain Marco Reus…</p>
-                    <div>
-                        <span><i class="fas fa-tag"></i> Football, UEFA, Highlights</span>
-                        <span><i class="fas fa-comment"></i> 213 comments</span>
-                        <span><i class="fas fa-clock"></i> 1 day ago</span>
-                    </div>
-                </article>
-
+                </div>
                 <!-- Card 4 -->
-                <article>
-                    <span>Culture</span>
-                    <h3><a href="#">Street Art Festival Transforms Downtown with 50+ Murals</a></h3>
-                    <div>
-                        <span>By <strong>Liam O'Brien</strong></span>
-                        <span>•</span>
-                        <span>May 14, 2026</span>
-                        <span>•</span>
-                        <span>3 min read</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <img src="https://picsum.photos/seed/art2/600/300" class="card-img-top" alt="Art" />
+                        <div class="card-body">
+                            <span class="badge bg-green mb-2">Culture</span>
+                            <h5 class="card-title"><a href="#" class="text-decoration-none text-dark">Street Art Festival Transforms Downtown with 50+ Murals</a></h5>
+                            <div class="text-muted small">By <strong>Liam O'Brien</strong> • May 14, 2026 • 3 min read</div>
+                            <p class="card-text mt-2">Over 150 international artists descended on the city for the annual Mural Fest, painting vibrant large-scale works...</p>
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span><i class="fas fa-tag"></i> Art, Community</span>
+                                <span><i class="fas fa-comment"></i> 41</span>
+                                <span><i class="fas fa-clock"></i> 2 days ago</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>Over 150 international artists descended on the city for the annual Mural Fest, painting vibrant large‑scale works on building facades…</p>
-                    <div>
-                        <span><i class="fas fa-tag"></i> Art, Community, Events</span>
-                        <span><i class="fas fa-comment"></i> 41 comments</span>
-                        <span><i class="fas fa-clock"></i> 2 days ago</span>
-                    </div>
-                </article>
-
+                </div>
                 <!-- Card 5 -->
-                <article>
-                    <span>Science</span>
-                    <h3><a href="#">Scientists Successfully Grow Mini‑Brains with Functional Neural Networks</a></h3>
-                    <div>
-                        <span>By <strong>Dr. Aisha Khan</strong></span>
-                        <span>•</span>
-                        <span>May 13, 2026</span>
-                        <span>•</span>
-                        <span>7 min read</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <img src="https://picsum.photos/seed/brain2/600/300" class="card-img-top" alt="Brain" />
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">Science</span>
+                            <h5 class="card-title"><a href="#" class="text-decoration-none text-dark">Scientists Successfully Grow Mini‑Brains with Functional Neural Networks</a></h5>
+                            <div class="text-muted small">By <strong>Dr. Aisha Khan</strong> • May 13, 2026 • 7 min read</div>
+                            <p class="card-text mt-2">In a groundbreaking study published in Nature, a team from MIT has cultivated cerebral organoids...</p>
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span><i class="fas fa-tag"></i> Neuroscience, Research</span>
+                                <span><i class="fas fa-comment"></i> 112</span>
+                                <span><i class="fas fa-clock"></i> 3 days ago</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>In a groundbreaking study published in Nature, a team from MIT has cultivated cerebral organoids that exhibit spontaneous electrical activity…</p>
-                    <div>
-                        <span><i class="fas fa-tag"></i> Neuroscience, Research, Genetics</span>
-                        <span><i class="fas fa-comment"></i> 112 comments</span>
-                        <span><i class="fas fa-clock"></i> 3 days ago</span>
-                    </div>
-                </article>
-
+                </div>
                 <!-- Card 6 -->
-                <article>
-                    <span>Politics</span>
-                    <h3><a href="#">Election Reform Bill Passes First Reading with Bipartisan Support</a></h3>
-                    <div>
-                        <span>By <strong>Sarah Chen</strong></span>
-                        <span>•</span>
-                        <span>May 12, 2026</span>
-                        <span>•</span>
-                        <span>5 min read</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <img src="https://picsum.photos/seed/politics2/600/300" class="card-img-top" alt="Politics" />
+                        <div class="card-body">
+                            <span class="badge bg-green mb-2">Politics</span>
+                            <h5 class="card-title"><a href="#" class="text-decoration-none text-dark">Election Reform Bill Passes First Reading with Bipartisan Support</a></h5>
+                            <div class="text-muted small">By <strong>Sarah Chen</strong> • May 12, 2026 • 5 min read</div>
+                            <p class="card-text mt-2">The proposed Fair Representation Act, which includes ranked-choice voting, independent redistricting...</p>
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span><i class="fas fa-tag"></i> Government, Law</span>
+                                <span><i class="fas fa-comment"></i> 156</span>
+                                <span><i class="fas fa-clock"></i> 4 days ago</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>The proposed Fair Representation Act, which includes ranked‑choice voting, independent redistricting, and campaign finance transparency…</p>
-                    <div>
-                        <span><i class="fas fa-tag"></i> Government, Law, Democracy</span>
-                        <span><i class="fas fa-comment"></i> 156 comments</span>
-                        <span><i class="fas fa-clock"></i> 4 days ago</span>
-                    </div>
-                </article>
-
+                </div>
                 <!-- Card 7 -->
-                <article>
-                    <span>World</span>
-                    <h3><a href="#">UN Announces $50 Billion Food Security Initiative for Africa</a></h3>
-                    <div>
-                        <span>By <strong>Global Affairs</strong></span>
-                        <span>•</span>
-                        <span>May 11, 2026</span>
-                        <span>•</span>
-                        <span>6 min read</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <img src="https://picsum.photos/seed/world/600/300" class="card-img-top" alt="World" />
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">World</span>
+                            <h5 class="card-title"><a href="#" class="text-decoration-none text-dark">UN Announces $50 Billion Food Security Initiative for Africa</a></h5>
+                            <div class="text-muted small">By <strong>Global Affairs</strong> • May 11, 2026 • 6 min read</div>
+                            <p class="card-text mt-2">The program aims to boost local farming, irrigation, and supply chains across 30 nations...</p>
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span><i class="fas fa-tag"></i> Aid, Agriculture</span>
+                                <span><i class="fas fa-comment"></i> 98</span>
+                                <span><i class="fas fa-clock"></i> 5 days ago</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>The program aims to boost local farming, irrigation, and supply chains across 30 nations, with a focus on sustainable agriculture…</p>
-                    <div>
-                        <span><i class="fas fa-tag"></i> Aid, Agriculture, Climate</span>
-                        <span><i class="fas fa-comment"></i> 98 comments</span>
-                        <span><i class="fas fa-clock"></i> 5 days ago</span>
-                    </div>
-                </article>
-
+                </div>
                 <!-- Card 8 -->
-                <article>
-                    <span>Technology</span>
-                    <h3><a href="#">Blockchain Adoption Surges as Major Banks Launch Crypto Services</a></h3>
-                    <div>
-                        <span>By <strong>Finance Weekly</strong></span>
-                        <span>•</span>
-                        <span>May 10, 2026</span>
-                        <span>•</span>
-                        <span>4 min read</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <img src="https://picsum.photos/seed/crypto/600/300" class="card-img-top" alt="Crypto" />
+                        <div class="card-body">
+                            <span class="badge bg-green mb-2">Technology</span>
+                            <h5 class="card-title"><a href="#" class="text-decoration-none text-dark">Blockchain Adoption Surges as Major Banks Launch Crypto Services</a></h5>
+                            <div class="text-muted small">By <strong>Finance Weekly</strong> • May 10, 2026 • 4 min read</div>
+                            <p class="card-text mt-2">JPMorgan, HSBC, and BNP Paribas now offer custodial and trading services for institutional clients...</p>
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span><i class="fas fa-tag"></i> Crypto, Banking</span>
+                                <span><i class="fas fa-comment"></i> 73</span>
+                                <span><i class="fas fa-clock"></i> 6 days ago</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>JPMorgan, HSBC, and BNP Paribas now offer custodial and trading services for institutional clients, signaling a major shift in traditional finance…</p>
-                    <div>
-                        <span><i class="fas fa-tag"></i> Crypto, Banking, Fintech</span>
-                        <span><i class="fas fa-comment"></i> 73 comments</span>
-                        <span><i class="fas fa-clock"></i> 6 days ago</span>
-                    </div>
-                </article>
-
+                </div>
                 <!-- Card 9 -->
-                <article>
-                    <span>Health</span>
-                    <h3><a href="#">Mediterranean Diet Slows Brain Ageing by 5 Years, New Study Finds</a></h3>
-                    <div>
-                        <span>By <strong>Health Desk</strong></span>
-                        <span>•</span>
-                        <span>May 9, 2026</span>
-                        <span>•</span>
-                        <span>5 min read</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <img src="https://picsum.photos/seed/diet/600/300" class="card-img-top" alt="Diet" />
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">Health</span>
+                            <h5 class="card-title"><a href="#" class="text-decoration-none text-dark">Mediterranean Diet Slows Brain Ageing by 5 Years, New Study Finds</a></h5>
+                            <div class="text-muted small">By <strong>Health Desk</strong> • May 9, 2026 • 5 min read</div>
+                            <p class="card-text mt-2">Long‑term research shows that olive oil, fish, and leafy greens boost cognitive resilience...</p>
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span><i class="fas fa-tag"></i> Nutrition, Neurology</span>
+                                <span><i class="fas fa-comment"></i> 54</span>
+                                <span><i class="fas fa-clock"></i> 1 week ago</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>Long‑term research shows that olive oil, fish, and leafy greens boost cognitive resilience, with participants showing the brain age of someone five years younger…</p>
-                    <div>
-                        <span><i class="fas fa-tag"></i> Nutrition, Neurology, Diet</span>
-                        <span><i class="fas fa-comment"></i> 54 comments</span>
-                        <span><i class="fas fa-clock"></i> 1 week ago</span>
-                    </div>
-                </article>
-
+                </div>
                 <!-- Card 10 -->
-                <article>
-                    <span>Space</span>
-                    <h3><a href="#">SpaceX Launches First All‑Civilian Mission to Lunar Orbit</a></h3>
-                    <div>
-                        <span>By <strong>Space Today</strong></span>
-                        <span>•</span>
-                        <span>May 8, 2026</span>
-                        <span>•</span>
-                        <span>8 min read</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <img src="https://picsum.photos/seed/space/600/300" class="card-img-top" alt="Space" />
+                        <div class="card-body">
+                            <span class="badge bg-green mb-2">Space</span>
+                            <h5 class="card-title"><a href="#" class="text-decoration-none text-dark">SpaceX Launches First All‑Civilian Mission to Lunar Orbit</a></h5>
+                            <div class="text-muted small">By <strong>Space Today</strong> • May 8, 2026 • 8 min read</div>
+                            <p class="card-text mt-2">The four‑person crew will spend 8 days in lunar orbit, conducting scientific experiments...</p>
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span><i class="fas fa-tag"></i> Space, Exploration</span>
+                                <span><i class="fas fa-comment"></i> 132</span>
+                                <span><i class="fas fa-clock"></i> 1 week ago</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>The four‑person crew will spend 8 days in lunar orbit, conducting scientific experiments and testing new life‑support systems for future deep‑space travel…</p>
-                    <div>
-                        <span><i class="fas fa-tag"></i> Space, Exploration, Commercial</span>
-                        <span><i class="fas fa-comment"></i> 132 comments</span>
-                        <span><i class="fas fa-clock"></i> 1 week ago</span>
-                    </div>
-                </article>
-
+                </div>
                 <!-- Card 11 -->
-                <article>
-                    <span>Climate</span>
-                    <h3><a href="#">Record‑Breaking Heatwave Grips Southern Europe – Emergency Plans Activated</a></h3>
-                    <div>
-                        <span>By <strong>Weather Desk</strong></span>
-                        <span>•</span>
-                        <span>May 7, 2026</span>
-                        <span>•</span>
-                        <span>4 min read</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <img src="https://picsum.photos/seed/heatwave/600/300" class="card-img-top" alt="Heatwave" />
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">Climate</span>
+                            <h5 class="card-title"><a href="#" class="text-decoration-none text-dark">Record‑Breaking Heatwave Grips Southern Europe – Emergency Plans Activated</a></h5>
+                            <div class="text-muted small">By <strong>Weather Desk</strong> • May 7, 2026 • 4 min read</div>
+                            <p class="card-text mt-2">Temperatures exceed 45°C in Spain and Italy, with authorities issuing red alerts...</p>
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span><i class="fas fa-tag"></i> Weather, Climate</span>
+                                <span><i class="fas fa-comment"></i> 67</span>
+                                <span><i class="fas fa-clock"></i> 1 week ago</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>Temperatures exceed 45°C in Spain and Italy, with authorities issuing red alerts and opening cooling centres across the region…</p>
-                    <div>
-                        <span><i class="fas fa-tag"></i> Weather, Climate, Emergency</span>
-                        <span><i class="fas fa-comment"></i> 67 comments</span>
-                        <span><i class="fas fa-clock"></i> 1 week ago</span>
-                    </div>
-                </article>
-
+                </div>
                 <!-- Card 12 -->
-                <article>
-                    <span>Entertainment</span>
-                    <h3><a href="#">Hollywood Writers' Union Reaches Tentative Deal with Studios</a></h3>
-                    <div>
-                        <span>By <strong>Entertainment Weekly</strong></span>
-                        <span>•</span>
-                        <span>May 6, 2026</span>
-                        <span>•</span>
-                        <span>3 min read</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <img src="https://picsum.photos/seed/hollywood/600/300" class="card-img-top" alt="Hollywood" />
+                        <div class="card-body">
+                            <span class="badge bg-green mb-2">Entertainment</span>
+                            <h5 class="card-title"><a href="#" class="text-decoration-none text-dark">Hollywood Writers' Union Reaches Tentative Deal with Studios</a></h5>
+                            <div class="text-muted small">By <strong>Entertainment Weekly</strong> • May 6, 2026 • 3 min read</div>
+                            <p class="card-text mt-2">The new contract includes AI protections, residual increases, and minimum staffing guarantees...</p>
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span><i class="fas fa-tag"></i> Film, Labor</span>
+                                <span><i class="fas fa-comment"></i> 44</span>
+                                <span><i class="fas fa-clock"></i> 1 week ago</span>
+                            </div>
+                        </div>
                     </div>
-                    <p>The new contract includes AI protections, residual increases, and minimum staffing guarantees, ending the 3‑month strike that had halted production…</p>
-                    <div>
-                        <span><i class="fas fa-tag"></i> Film, Labor, AI</span>
-                        <span><i class="fas fa-comment"></i> 44 comments</span>
-                        <span><i class="fas fa-clock"></i> 1 week ago</span>
-                    </div>
-                </article>
-
+                </div>
             </div>
             <!-- Pagination -->
-            <div>
-                <a href="#">← Previous</a>
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">…</a>
-                <a href="#">21</a>
-                <a href="#">Next →</a>
-            </div>
+            <nav class="mt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled"><a class="page-link" href="#">← Previous</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">…</a></li>
+                    <li class="page-item"><a class="page-link" href="#">21</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next →</a></li>
+                </ul>
+            </nav>
         </div>
     </section>
 
-    <!-- ===== TRENDING NOW (same as index) ===== -->
-    <section>
-        <div>
-            <div>
-                <h2>Trending <span>Now</span></h2>
-                <span>Most discussed stories today</span>
-            </div>
-            <div>
-                <div>
-                    <span>01</span>
-                    <div>
-                        <h4><a href="#">New Electric Vehicle Breaks Speed Record at 450 km/h</a></h4>
-                        <span>By Auto Desk • 2 hours ago • 1.2k shares</span>
-                        <p>The Rimac Nevera 2.0 shattered the previous EV record, accelerating from 0–100 in just 1.8 seconds.</p>
-                    </div>
-                </div>
-                <div>
-                    <span>02</span>
-                    <div>
-                        <h4><a href="#">UN Announces $50 Billion Food Security Initiative for Africa</a></h4>
-                        <span>By Global Affairs • 4 hours ago • 987 shares</span>
-                        <p>The program aims to boost local farming, irrigation, and supply chains across 30 nations.</p>
-                    </div>
-                </div>
-                <div>
-                    <span>03</span>
-                    <div>
-                        <h4><a href="#">Blockchain Adoption Surges as Major Banks Launch Crypto Services</a></h4>
-                        <span>By Finance Weekly • 6 hours ago • 845 shares</span>
-                        <p>JPMorgan, HSBC, and BNP Paribas now offer custodial and trading services for institutional clients.</p>
-                    </div>
-                </div>
-                <div>
-                    <span>04</span>
-                    <div>
-                        <h4><a href="#">Historic Peace Deal Signed in the Middle East After Years of Conflict</a></h4>
-                        <span>By Diplomatic Correspondent • 8 hours ago • 1.4k shares</span>
-                        <p>The agreement includes border adjustments, mutual recognition, and a joint economic zone.</p>
-                    </div>
-                </div>
-                <div>
-                    <span>05</span>
-                    <div>
-                        <h4><a href="#">New Study Reveals Mediterranean Diet Slows Brain Ageing by 5 Years</a></h4>
-                        <span>By Health Desk • 10 hours ago • 672 shares</span>
-                        <p>Long‑term research shows that olive oil, fish, and leafy greens boost cognitive resilience.</p>
-                    </div>
-                </div>
-                <div>
-                    <span>06</span>
-                    <div>
-                        <h4><a href="#">SpaceX Launches First All‑Civilian Mission to Lunar Orbit</a></h4>
-                        <span>By Space Today • 12 hours ago • 1.1k shares</span>
-                        <p>The four‑person crew will spend 8 days in lunar orbit, conducting scientific experiments.</p>
-                    </div>
+    <!-- ===== TRENDING (same as index) ===== -->
+    <section id="trendingSection" class="py-5 bg-light">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col">
+                    <h2 class="fw-bold">Trending <span class="text-green">Now</span></h2>
+                    <span class="text-muted">Most discussed stories today</span>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ===== NEWSLETTER (identical to index) ===== -->
-    <section>
-        <div>
-            <div>
-                <h2>Subscribe to <span>The Raptor</span> Daily</h2>
-                <p>Join over 250,000 readers who start their morning with our curated briefing. Get the top 5 stories, exclusive insights, and a weekly deep‑dive — all free.</p>
-                <div>
-                    <form>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="d-flex gap-3 align-items-start">
+                        <span class="badge bg-primary rounded-circle p-3 fs-5">01</span>
                         <div>
-                            <label for="blogNewsletterEmail">Email address</label>
-                            <input type="email" id="blogNewsletterEmail" placeholder="you@example.com" required />
+                            <h5><a href="#" class="text-decoration-none text-dark">New Electric Vehicle Breaks Speed Record at 450 km/h</a></h5>
+                            <span class="text-muted small">By Auto Desk • 2 hours ago • 1.2k shares</span>
+                            <p class="text-muted small">The Rimac Nevera 2.0 shattered the previous EV record...</p>
                         </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex gap-3 align-items-start">
+                        <span class="badge bg-green rounded-circle p-3 fs-5">02</span>
                         <div>
-                            <label for="blogNewsletterFrequency">Preferred frequency</label>
-                            <select id="blogNewsletterFrequency">
-                                <option value="daily">Daily (every morning)</option>
-                                <option value="weekly">Weekly (every Monday)</option>
-                                <option value="weekend">Weekend roundup (Saturday)</option>
-                            </select>
+                            <h5><a href="#" class="text-decoration-none text-dark">UN Announces $50 Billion Food Security Initiative for Africa</a></h5>
+                            <span class="text-muted small">By Global Affairs • 4 hours ago • 987 shares</span>
+                            <p class="text-muted small">The program aims to boost local farming, irrigation...</p>
                         </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex gap-3 align-items-start">
+                        <span class="badge bg-primary rounded-circle p-3 fs-5">03</span>
                         <div>
-                            <label>
-                                <input type="checkbox" checked /> I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms</a>
-                            </label>
-                            <label>
-                                <input type="checkbox" /> I want to receive occasional special reports and offers
-                            </label>
+                            <h5><a href="#" class="text-decoration-none text-dark">Blockchain Adoption Surges as Major Banks Launch Crypto Services</a></h5>
+                            <span class="text-muted small">By Finance Weekly • 6 hours ago • 845 shares</span>
+                            <p class="text-muted small">JPMorgan, HSBC, and BNP Paribas now offer custodial...</p>
                         </div>
-                        <button type="submit"><i class="fas fa-envelope"></i> Subscribe Now</button>
-                    </form>
-                    <div>
-                        <span><i class="fas fa-check-circle"></i> No spam, unsubscribe anytime</span>
-                        <span><i class="fas fa-lock"></i> Your data is secure</span>
-                        <span><i class="fas fa-star"></i> Trusted by 250k+ readers</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex gap-3 align-items-start">
+                        <span class="badge bg-green rounded-circle p-3 fs-5">04</span>
+                        <div>
+                            <h5><a href="#" class="text-decoration-none text-dark">Historic Peace Deal Signed in the Middle East After Years of Conflict</a></h5>
+                            <span class="text-muted small">By Diplomatic Correspondent • 8 hours ago • 1.4k shares</span>
+                            <p class="text-muted small">The agreement includes border adjustments, mutual recognition...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex gap-3 align-items-start">
+                        <span class="badge bg-primary rounded-circle p-3 fs-5">05</span>
+                        <div>
+                            <h5><a href="#" class="text-decoration-none text-dark">New Study Reveals Mediterranean Diet Slows Brain Ageing by 5 Years</a></h5>
+                            <span class="text-muted small">By Health Desk • 10 hours ago • 672 shares</span>
+                            <p class="text-muted small">Long-term research shows that olive oil, fish, and leafy greens...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex gap-3 align-items-start">
+                        <span class="badge bg-green rounded-circle p-3 fs-5">06</span>
+                        <div>
+                            <h5><a href="#" class="text-decoration-none text-dark">SpaceX Launches First All-Civilian Mission to Lunar Orbit</a></h5>
+                            <span class="text-muted small">By Space Today • 12 hours ago • 1.1k shares</span>
+                            <p class="text-muted small">The four-person crew will spend 8 days in lunar orbit...</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== FOOTER (identical to index) ===== -->
-    <footer>
-        <div>
-            <div>
-                <div>
-                    <a href="index.html">The<span>Raptor</span></a>
-                    <p>Independent, fact‑based journalism since 2012. We believe in the power of stories to inform, inspire, and drive change. Our team of 45 journalists operates across 20 countries.</p>
+    <!-- ===== FOOTER ===== -->
+    <footer id="mainFooter" class="py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <a href="index.html" class="site-logo text-white">The<span class="text-green">Raptor</span></a>
+                    <p class="text-muted small mt-2">Independent, fact‑based journalism since 2012. Our team of 45 journalists operates across 20 countries.</p>
                     <div>
-                        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
-                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                        <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
-                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-                        <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="#" class="text-muted me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-muted me-2"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-muted me-2"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="text-muted me-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
-                <div>
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Homepage</a></li>
-                        <li><a href="blog.html">All Articles</a></li>
-                        <li><a href="podcast.html">Podcast</a></li>
-                        <li><a href="about.html">Our Team</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="#">Advertise</a></li>
-                        <li><a href="#">Careers</a></li>
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="fw-bold">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-muted text-decoration-none">Homepage</a></li>
+                        <li><a href="blog.html" class="text-muted text-decoration-none">All Articles</a></li>
+                        <li><a href="about.html" class="text-muted text-decoration-none">Our Team</a></li>
+                        <li><a href="contact.html" class="text-muted text-decoration-none">Contact Us</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Advertise</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Careers</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h4>Categories</h4>
-                    <ul>
-                        <li><a href="#">World</a> (126)</li>
-                        <li><a href="#">Technology</a> (98)</li>
-                        <li><a href="#">Business</a> (74)</li>
-                        <li><a href="#">Sports</a> (52)</li>
-                        <li><a href="#">Culture</a> (43)</li>
-                        <li><a href="#">Science</a> (38)</li>
-                        <li><a href="#">Health</a> (31)</li>
-                        <li><a href="#">Travel</a> (27)</li>
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="fw-bold">Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none">World</a> (126)</li>
+                        <li><a href="#" class="text-muted text-decoration-none">Technology</a> (98)</li>
+                        <li><a href="#" class="text-muted text-decoration-none">Business</a> (74)</li>
+                        <li><a href="#" class="text-muted text-decoration-none">Sports</a> (52)</li>
+                        <li><a href="#" class="text-muted text-decoration-none">Culture</a> (43)</li>
+                        <li><a href="#" class="text-muted text-decoration-none">Science</a> (38)</li>
+                        <li><a href="#" class="text-muted text-decoration-none">Health</a> (31)</li>
+                        <li><a href="#" class="text-muted text-decoration-none">Travel</a> (27)</li>
                     </ul>
                 </div>
-                <div>
-                    <h4>Get in Touch</h4>
-                    <ul>
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:info@theraptor.com">info@theraptor.com</a></li>
-                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                        <li><i class="fas fa-map-pin"></i> 123 News Avenue, New York, NY 10001</li>
-                        <li><i class="fas fa-clock"></i> Mon–Fri: 8:00 AM – 10:00 PM (EST)</li>
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="fw-bold">Get in Touch</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope text-muted"></i> <a href="mailto:info@theraptor.com" class="text-muted text-decoration-none">info@theraptor.com</a></li>
+                        <li><i class="fas fa-phone text-muted"></i> <span class="text-muted">+1 (555) 123-4567</span></li>
+                        <li><i class="fas fa-map-pin text-muted"></i> <span class="text-muted">123 News Avenue, NY</span></li>
+                        <li><i class="fas fa-clock text-muted"></i> <span class="text-muted">Mon–Fri: 8AM–10PM</span></li>
                     </ul>
-                    <h4>Archives</h4>
-                    <ul>
-                        <li><a href="#">2026</a> • <a href="#">2025</a> • <a href="#">2024</a></li>
-                        <li><a href="#">Special Reports</a> • <a href="#">Interviews</a></li>
+                    <h5 class="fw-bold mt-3">Archives</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none">2026</a> • <a href="#" class="text-muted text-decoration-none">2025</a> • <a href="#" class="text-muted text-decoration-none">2024</a></li>
                     </ul>
                 </div>
             </div>
-            <div>
-                <p>&copy; 2026 The Raptor Media Group. All rights reserved. | ISSN 2834-5678</p>
-                <div>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Cookie Settings</a>
-                    <a href="#">Accessibility</a>
-                    <a href="#">RSS Feed</a>
+            <hr class="border-secondary" />
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-muted small mb-0">&copy; 2026 The Raptor Media Group. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-muted small text-decoration-none me-2">Privacy</a>
+                    <a href="#" class="text-muted small text-decoration-none me-2">Terms</a>
+                    <a href="#" class="text-muted small text-decoration-none">RSS</a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
