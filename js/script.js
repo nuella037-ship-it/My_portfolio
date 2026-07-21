@@ -404,3 +404,19 @@ function getFallbackArticles() {
 //  INIT
 // ============================================
 document.addEventListener('DOMContentLoaded', loadArticles);
+// ============================================
+//  HIDE MOBILE NAV ON RESIZE TO MD OR LARGER
+// ============================================
+function handleResize() {
+    const mobileNav = document.getElementById('mobileNav');
+    if (window.innerWidth >= 768 && mobileNav) {
+        mobileNav.style.display = 'none';
+    }
+}
+
+window.addEventListener('resize', handleResize);
+// Also call once on load to ensure correct state
+document.addEventListener('DOMContentLoaded', function() {
+    handleResize();
+    // ... rest of your init (like loadArticles) ...
+});
