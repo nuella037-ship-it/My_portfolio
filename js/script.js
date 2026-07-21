@@ -1,5 +1,5 @@
 // ============================================================
-//  SUPABASE CONFIG – REPLACE THESE WITH YOUR ACTUAL KEYS
+//  SUPABASE CONFIG 
 // ============================================================
 const SUPABASE_URL = "https://aslkopamkdnvofjqzgjz.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_yZ8KyiOxJT3GBR_6wX1Plw_Yt_5IQ6f";
