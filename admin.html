@@ -8,41 +8,83 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <style>
+        /* ============================================================
+           ADMIN STYLES (extends main CSS)
+           ============================================================ */
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2e86c1;
+            --green: #1e8449;
+            --green-light: #28b463;
+            --dark-bg: #1a1a2e;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: #f4f6f9;
+            transition: background 0.3s, color 0.3s;
         }
+
+        body.dark-mode {
+            background: var(--dark-bg);
+            color: #f8f9fa;
+        }
+
         .site-logo {
             font-size: 1.6rem;
             font-weight: 800;
             text-decoration: none;
             color: #212529;
+            transition: color 0.3s;
         }
         .site-logo span {
-            color: #1e8449;
+            color: var(--green);
         }
+        body.dark-mode .site-logo {
+            color: #f8f9fa;
+        }
+        body.dark-mode .site-logo span {
+            color: var(--green-light);
+        }
+
         .text-green {
-            color: #1e8449;
+            color: var(--green) !important;
         }
         .bg-green {
-            background-color: #1e8449;
+            background-color: var(--green) !important;
         }
+
         .dashboard-card {
             border-radius: 16px;
             border: none;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            transition: transform 0.2s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s, box-shadow 0.2s;
+            background: #fff;
         }
+        body.dark-mode .dashboard-card {
+            background: #2d2d44;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
         .dashboard-card:hover {
             transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
         }
+
         .list-group-item {
-            border-left: 4px solid #1a5276;
+            border-left: 4px solid var(--primary);
             border-radius: 8px !important;
             margin-bottom: 6px;
+            background: #fff;
+            transition: background 0.2s;
         }
+        body.dark-mode .list-group-item {
+            background: #2d2d44;
+            border-color: #444;
+            color: #f8f9fa;
+        }
+
         .list-group-item .badge {
             margin-left: 0.5rem;
         }
@@ -52,13 +94,18 @@
         .list-group-item .btn-sm:hover {
             opacity: 1;
         }
+
         .stat-box {
             background: #fff;
             border-radius: 12px;
             padding: 1.2rem;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-            transition: transform 0.2s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s, background 0.3s;
+        }
+        body.dark-mode .stat-box {
+            background: #2d2d44;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         .stat-box:hover {
             transform: scale(1.02);
@@ -66,7 +113,10 @@
         .stat-box .number {
             font-size: 2rem;
             font-weight: 800;
-            color: #1a5276;
+            color: var(--primary);
+        }
+        body.dark-mode .stat-box .number {
+            color: var(--primary-light);
         }
         .stat-box .label {
             font-size: 0.8rem;
@@ -74,6 +124,10 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+        body.dark-mode .stat-box .label {
+            color: #aaa;
+        }
+
         .unread-badge {
             background: #dc3545;
             color: #fff;
@@ -82,44 +136,68 @@
             font-size: 0.7rem;
             font-weight: 600;
         }
+
         .toast-container {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 1060;
+            max-width: 350px;
         }
         .toast {
             background: #fff;
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
             padding: 0.75rem 1.25rem;
             margin-bottom: 0.5rem;
-            min-width: 250px;
-            border-left: 4px solid #1e8449;
+            border-left: 4px solid var(--green);
             display: none;
+            animation: slideIn 0.3s ease;
+        }
+        body.dark-mode .toast {
+            background: #2d2d44;
+            color: #f8f9fa;
+            border-left-color: var(--green-light);
         }
         .toast.error {
             border-left-color: #dc3545;
         }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
         .nav-tabs .nav-link {
             border: none;
             border-radius: 8px;
             padding: 0.6rem 1.2rem;
             font-weight: 500;
+            transition: background 0.2s, color 0.2s;
         }
         .nav-tabs .nav-link.active {
-            background: #1a5276;
+            background: var(--primary);
             color: #fff;
+        }
+        body.dark-mode .nav-tabs .nav-link.active {
+            background: var(--primary-light);
         }
         .nav-tabs .nav-link:not(.active) {
             color: #6c757d;
         }
+        body.dark-mode .nav-tabs .nav-link:not(.active) {
+            color: #aaa;
+        }
         .nav-tabs .nav-link:not(.active):hover {
             background: #e9ecef;
         }
+        body.dark-mode .nav-tabs .nav-link:not(.active):hover {
+            background: #3d3d5a;
+        }
+
         .tab-content {
             padding-top: 1.5rem;
         }
+
         .empty-state {
             padding: 3rem;
             text-align: center;
@@ -141,8 +219,9 @@
                 max-width: 120px;
             }
         }
+
         .export-btn {
-            background: #1e8449;
+            background: var(--green);
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -154,18 +233,97 @@
             background: #145a32;
             color: #fff;
         }
+
+        /* Dark mode form overrides */
+        body.dark-mode .form-control,
+        body.dark-mode .form-select {
+            background-color: #3d3d5a;
+            border-color: #555;
+            color: #f8f9fa;
+        }
+        body.dark-mode .form-control:focus,
+        body.dark-mode .form-select:focus {
+            background-color: #4d4d6a;
+            border-color: var(--primary-light);
+            color: #fff;
+        }
+        body.dark-mode .form-label {
+            color: #ddd;
+        }
+        body.dark-mode .btn-outline-primary {
+            color: var(--primary-light);
+            border-color: var(--primary-light);
+        }
+        body.dark-mode .btn-outline-primary:hover {
+            background: var(--primary-light);
+            color: #fff;
+        }
+        body.dark-mode .btn-outline-secondary {
+            color: #aaa;
+            border-color: #555;
+        }
+        body.dark-mode .btn-outline-secondary:hover {
+            background: #555;
+            color: #fff;
+        }
+        body.dark-mode .btn-outline-danger {
+            color: #e74c3c;
+            border-color: #e74c3c;
+        }
+        body.dark-mode .btn-outline-danger:hover {
+            background: #e74c3c;
+            color: #fff;
+        }
+        body.dark-mode .btn-outline-success {
+            color: #2ecc71;
+            border-color: #2ecc71;
+        }
+        body.dark-mode .btn-outline-success:hover {
+            background: #2ecc71;
+            color: #fff;
+        }
+
+        .site-header {
+            background: #fff !important;
+            transition: background 0.3s;
+        }
+        body.dark-mode .site-header {
+            background: #1a1a2e !important;
+            border-bottom: 1px solid #333 !important;
+        }
+
+        .modal-content {
+            background: #fff;
+        }
+        body.dark-mode .modal-content {
+            background: #2d2d44;
+            color: #f8f9fa;
+        }
+        body.dark-mode .modal-header,
+        body.dark-mode .modal-footer {
+            border-color: #444;
+        }
+        .modal-header .btn-close {
+            filter: none;
+        }
+        body.dark-mode .modal-header .btn-close {
+            filter: invert(1) brightness(0.8);
+        }
     </style>
 </head>
 <body>
 
     <!-- ===== HEADER ===== -->
-    <header class="site-header bg-white border-bottom py-2">
+    <header class="site-header border-bottom py-2">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-6 col-lg-3">
                     <a href="index.html" class="site-logo">The<span>Raptor</span></a>
                 </div>
                 <div class="col-6 col-lg-9 text-end">
+                    <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm me-2" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
                     <a href="index.html" class="btn btn-outline-primary btn-sm me-2"><i class="fas fa-home"></i> Home</a>
                     <span class="text-muted small d-none d-md-inline">| Admin Panel</span>
                 </div>
@@ -229,10 +387,11 @@
                 <!-- ===== TAB 1: ARTICLES ===== -->
                 <div class="tab-pane fade show active" id="articles" role="tabpanel">
 
-                    <!-- Add Article Form -->
+                    <!-- Add/Edit Article Form -->
                     <div class="card dashboard-card p-4 mb-4">
-                        <h4 class="fw-bold mb-3"><i class="fas fa-plus-circle text-green"></i> Add New Article</h4>
+                        <h4 class="fw-bold mb-3" id="formTitle"><i class="fas fa-plus-circle text-green"></i> Add New Article</h4>
                         <form id="articleForm">
+                            <input type="hidden" id="editArticleId" value="" />
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label">Title *</label>
@@ -267,7 +426,8 @@
                                     <input type="text" id="articleReadTime" class="form-control" placeholder="5 min read" />
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add Article</button>
+                                    <button type="submit" class="btn btn-primary" id="formSubmitBtn"><i class="fas fa-plus"></i> Add Article</button>
+                                    <button type="button" class="btn btn-secondary d-none" id="formCancelBtn"><i class="fas fa-times"></i> Cancel</button>
                                     <span id="formStatus" class="text-muted ms-2"></span>
                                 </div>
                             </div>
@@ -332,20 +492,40 @@
         <div id="toastMessage" class="toast">Success!</div>
     </div>
 
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- ============================================================
+         MAIN ADMIN SCRIPT
+         ============================================================ -->
     <script>
         // ============================================================
-//  SUPABASE CONFIG 
-// ============================================================
-const SUPABASE_URL = "https://aslkopamkdnvofjqzgjz.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_yZ8KyiOxJT3GBR_6wX1Plw_Yt_5IQ6f";
+        //  SUPABASE CONFIG
+        // ============================================================
+        const SUPABASE_URL = "https://aslkopamkdnvofjqzgjz.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_yZ8KyiOxJT3GBR_6wX1Plw_Yt_5IQ6f";
 
-// Initialize Supabase client
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // Initialize Supabase client
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        window.supabaseClient = supabaseClient;
 
-// Make it globally available so all functions can use it
-window.supabaseClient = supabase;
+        // ============================================================
+        //  DARK MODE TOGGLE
+        // ============================================================
+        (function initDarkMode() {
+            const toggle = document.getElementById('darkModeToggle');
+            if (!toggle) return;
+            const saved = localStorage.getItem('darkMode');
+            if (saved === 'true') {
+                document.body.classList.add('dark-mode');
+                toggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+            toggle.addEventListener('click', function() {
+                const isDark = document.body.classList.toggle('dark-mode');
+                this.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                localStorage.setItem('darkMode', isDark);
+            });
+        })();
 
         // ============================================================
         //  LOAD ALL DATA
@@ -360,7 +540,7 @@ window.supabaseClient = supabase;
         }
 
         // ============================================================
-        //  ARTICLES (existing functions)
+        //  ARTICLES
         // ============================================================
         async function loadAdminArticles() {
             const container = document.getElementById('adminArticleList');
@@ -381,13 +561,23 @@ window.supabaseClient = supabase;
 
                 let html = '';
                 data.forEach(article => {
+                    const excerpt = article.excerpt || article.content.substring(0, 100) + '…';
                     html += `
                         <div class="list-group-item d-flex justify-content-between align-items-start">
-                            <div>
-                                <strong>${article.title}</strong> <span class="badge bg-primary">${article.category}</span>
-                                <br /><small class="text-muted">${article.author || 'Editor'} • ${article.date || new Date(article.created_at).toLocaleDateString()}</small>
+                            <div class="flex-grow-1">
+                                <div class="d-flex flex-wrap align-items-center gap-2">
+                                    <strong>${article.title}</strong>
+                                    <span class="badge bg-primary">${article.category}</span>
+                                </div>
+                                <div class="text-muted small">
+                                    ${article.author || 'Editor'} • ${article.date || new Date(article.created_at).toLocaleDateString()}
+                                    ${article.readTime ? ` • ${article.readTime}` : ''}
+                                </div>
+                                <div class="text-muted small mt-1">${excerpt}</div>
                             </div>
-                            <div>
+                            <div class="d-flex gap-1 flex-shrink-0">
+                                <a href="blog.html?id=${article.id}" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="fas fa-eye"></i></a>
+                                <button class="btn btn-sm btn-outline-primary" onclick="editArticle('${article.id}')"><i class="fas fa-edit"></i></button>
                                 <button class="btn btn-sm btn-outline-danger" onclick="deleteArticle('${article.id}')"><i class="fas fa-trash"></i></button>
                             </div>
                         </div>
@@ -412,17 +602,64 @@ window.supabaseClient = supabase;
             }
         };
 
-        // Article form submission
+        // Edit article – populate form
+        window.editArticle = async function(id) {
+            try {
+                const { data, error } = await supabaseClient
+                    .from('articles')
+                    .select('*')
+                    .eq('id', id)
+                    .single();
+                if (error) throw error;
+
+                document.getElementById('editArticleId').value = data.id;
+                document.getElementById('articleTitle').value = data.title;
+                document.getElementById('articleCategory').value = data.category;
+                document.getElementById('articleContent').value = data.content;
+                document.getElementById('articleAuthor').value = data.author || '';
+                document.getElementById('articleDate').value = data.date || '';
+                document.getElementById('articleImage').value = data.image || '';
+                document.getElementById('articleTags').value = (data.tags || []).join(', ');
+                document.getElementById('articleReadTime').value = data.readTime || '';
+
+                document.getElementById('formTitle').innerHTML = '<i class="fas fa-edit text-green"></i> Edit Article';
+                document.getElementById('formSubmitBtn').innerHTML = '<i class="fas fa-save"></i> Update Article';
+                document.getElementById('formCancelBtn').classList.remove('d-none');
+                document.getElementById('formStatus').textContent = 'Editing...';
+                // Scroll to form
+                document.querySelector('#articles .card:first-child').scrollIntoView({ behavior: 'smooth' });
+            } catch (err) {
+                showToast('Failed to load article: ' + err.message, 'error');
+            }
+        };
+
+        // Cancel edit
+        document.getElementById('formCancelBtn')?.addEventListener('click', function() {
+            resetForm();
+        });
+
+        function resetForm() {
+            document.getElementById('editArticleId').value = '';
+            document.getElementById('articleForm').reset();
+            document.getElementById('formTitle').innerHTML = '<i class="fas fa-plus-circle text-green"></i> Add New Article';
+            document.getElementById('formSubmitBtn').innerHTML = '<i class="fas fa-plus"></i> Add Article';
+            document.getElementById('formCancelBtn').classList.add('d-none');
+            document.getElementById('formStatus').textContent = '';
+        }
+
+        // Article form submission (add or update)
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('articleForm');
             if (!form) return;
 
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
-                const submitBtn = this.querySelector('button[type="submit"]');
+                const submitBtn = document.getElementById('formSubmitBtn');
+                const status = document.getElementById('formStatus');
                 submitBtn.disabled = true;
-                document.getElementById('formStatus').textContent = 'Saving...';
+                status.textContent = 'Saving...';
 
+                const id = document.getElementById('editArticleId').value;
                 const title = document.getElementById('articleTitle').value.trim();
                 const category = document.getElementById('articleCategory').value.trim();
                 const content = document.getElementById('articleContent').value.trim();
@@ -434,38 +671,64 @@ window.supabaseClient = supabase;
                 const readTime = document.getElementById('articleReadTime').value.trim() || '4 min read';
 
                 if (!title || !category || !content || !author) {
-                    alert('Please fill in all required fields (Title, Category, Content, Author)');
+                    showToast('Please fill in all required fields.', 'error');
                     submitBtn.disabled = false;
-                    document.getElementById('formStatus').textContent = '';
+                    status.textContent = '';
                     return;
                 }
 
-                try {
-                    const { data, error } = await supabaseClient
-                        .from('articles')
-                        .insert([{
-                            title,
-                            category,
-                            content,
-                            author,
-                            date,
-                            image,
-                            tags,
-                            readTime,
-                            comments: 0,
-                            shares: 0,
-                            excerpt: content.substring(0, 120) + '…'
-                        }])
-                        .select();
+                // Auto‑generate excerpt
+                const excerpt = content.substring(0, 160) + '…';
 
-                    if (error) throw error;
-                    showToast('Article published!', 'success');
-                    form.reset();
+                try {
+                    let result;
+                    if (id) {
+                        // Update
+                        result = await supabaseClient
+                            .from('articles')
+                            .update({
+                                title,
+                                category,
+                                content,
+                                author,
+                                date,
+                                image,
+                                tags,
+                                readTime,
+                                excerpt
+                            })
+                            .eq('id', id)
+                            .select();
+                    } else {
+                        // Insert
+                        result = await supabaseClient
+                            .from('articles')
+                            .insert([{
+                                title,
+                                category,
+                                content,
+                                author,
+                                date,
+                                image,
+                                tags,
+                                readTime,
+                                excerpt,
+                                comments: 0,
+                                shares: 0
+                            }])
+                            .select();
+                    }
+
+                    if (result.error) throw result.error;
+
+                    showToast(id ? 'Article updated!' : 'Article published!', 'success');
+                    resetForm();
                     loadAllAdminData();
-                    document.getElementById('formStatus').textContent = '✅ Added!';
-                    setTimeout(() => document.getElementById('formStatus').textContent = '', 3000);
+                    status.textContent = id ? '✅ Updated!' : '✅ Added!';
+                    setTimeout(() => status.textContent = '', 3000);
                 } catch (err) {
-                    showToast('Failed to add: ' + err.message, 'error');
+                    showToast('Failed: ' + err.message, 'error');
+                    status.textContent = '❌ Error';
                 } finally {
                     submitBtn.disabled = false;
                 }
@@ -772,6 +1035,11 @@ window.supabaseClient = supabase;
             document.querySelector('[data-bs-target="#subscribers"]')?.addEventListener('click', function() {
                 loadAdminSubscribers();
                 updateStats();
+            });
+
+            // Also refresh when clicking articles tab (in case of edit)
+            document.querySelector('[data-bs-target="#articles"]')?.addEventListener('click', function() {
+                loadAdminArticles();
             });
         });
     </script>
