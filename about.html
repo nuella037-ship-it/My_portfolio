@@ -1,83 +1,390 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Raptor – About</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-    <header class="header">
-        <div class="container">
-            <a href="index.html" class="logo">The<span>Raptor</span></a>
-            <nav class="nav-links" id="navLinks">
+    <!-- ===== HEADER (identical to index) ===== -->
+    <header>
+        <div>
+            <a href="index.html">The<span>Raptor</span></a>
+            <nav>
                 <a href="index.html">Home</a>
                 <a href="blog.html">Blog</a>
-                <a href="about.html" class="active">About</a>
+                <a href="podcast.html">Podcast</a>
+                <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
-                <a href="#" id="searchToggle"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="fas fa-search"></i> Search</a>
             </nav>
-            <div style="display:flex;align-items:center;gap:6px;">
-                <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
-                <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            <div>
+                <button><i class="fas fa-moon"></i></button>
+                <button><span></span><span></span><span></span></button>
             </div>
         </div>
     </header>
 
-    <section style="padding:calc(var(--header-height) + 40px) 0 60px;">
-        <div class="container">
-            <div class="section-header center">
-                <div class="section-label">About Us</div>
-                <h2 class="section-title">Who We <span class="highlight">Are</span></h2>
-                <p class="section-desc">The Raptor is your trusted source for breaking news, in‑depth analysis, and stories that matter.</p>
+    <!-- ===== ABOUT HERO ===== -->
+    <section>
+        <div>
+            <div>
+                <span><i class="fas fa-info-circle"></i> About us</span>
+                <h1>Who We <span>Are</span></h1>
+                <p>The Raptor is an independent news platform delivering accurate, unbiased, and timely coverage of local and global events since 2022. Our team of 45 journalists operates across 20 countries, bringing you the stories that shape your world.</p>
+                <div>
+                    <span><i class="fas fa-calendar-alt"></i> Founded in 2022</span>
+                    <span><i class="fas fa-users"></i> 45+ journalists</span>
+                    <span><i class="fas fa-globe"></i> 20 countries</span>
+                    <span><i class="fas fa-file-alt"></i> 2,000+ articles published</span>
+                </div>
             </div>
-            <div class="about-grid">
-                <div class="about-text">
-                    <p>
-                        Founded in 2026, The Raptor is an independent news platform committed to delivering accurate, unbiased, and timely coverage of local and global events. Our team of experienced journalists works around the clock to bring you the stories that shape your world.
-                    </p>
-                    <p>
-                        We believe in the power of information to drive change. From politics to technology, health to sports, we provide a fresh perspective that cuts through the noise. Our readers trust us for our integrity, depth, and unwavering commitment to the truth.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <div class="number">2026</div>
-                            <div class="label">Founded</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="number">2K+</div>
-                            <div class="label">Articles</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="number">50K+</div>
-                            <div class="label">Readers</div>
-                        </div>
+        </div>
+    </section>
+
+    <!-- ===== OUR MISSION & VALUES ===== -->
+    <section>
+        <div>
+            <div>
+                <h2>Our <span>Mission</span></h2>
+                <p>To inform, empower, and connect communities through fearless, fact‑based journalism that holds power accountable and gives voice to the voiceless.</p>
+            </div>
+            <div>
+                <div>
+                    <div><i class="fas fa-balance-scale"></i></div>
+                    <div>
+                        <h4>Independence</h4>
+                        <p>We answer only to the truth. No corporate or political agenda dictates our coverage.</p>
                     </div>
                 </div>
-                <div class="about-image">
-                    <div class="img-placeholder">
-                        <i class="fas fa-newspaper"></i>
+                <div>
+                    <div><i class="fas fa-bullseye"></i></div>
+                    <div>
+                        <h4>Accuracy</h4>
+                        <p>Every story is rigorously fact‑checked. We correct errors swiftly and transparently.</p>
+                    </div>
+                </div>
+                <div>
+                    <div><i class="fas fa-hand-holding-heart"></i></div>
+                    <div>
+                        <h4>Empathy</h4>
+                        <p>We tell stories with humanity, respecting the dignity of everyone we cover.</p>
+                    </div>
+                </div>
+                <div>
+                    <div><i class="fas fa-lightbulb"></i></div>
+                    <div>
+                        <h4>Innovation</h4>
+                        <p>We embrace new tools and platforms to deliver journalism that matters, anywhere you are.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="copy">&copy; 2026 The Raptor. All rights reserved.</div>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+    <!-- ===== STATS / MILESTONES ===== -->
+    <section>
+        <div>
+            <div>
+                <div>
+                    <span>2,347</span>
+                    <span>Articles published</span>
+                </div>
+                <div>
+                    <span>52K</span>
+                    <span>Daily readers</span>
+                </div>
+                <div>
+                    <span>24/7</span>
+                    <span>Newsroom coverage</span>
+                </div>
+                <div>
+                    <span>98%</span>
+                    <span>Reader trust rating</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MEET THE TEAM ===== -->
+    <section>
+        <div>
+            <div>
+                <h2>Meet the <span>Team</span></h2>
+                <p>The people behind the stories — our editors, reporters, and creators.</p>
+            </div>
+            <div>
+                <!-- Team member 1 -->
+                <div>
+                    <div><i class="fas fa-user-circle"></i></div>
+                    <h4>Jane Doe</h4>
+                    <span>Editor‑in‑Chief</span>
+                    <p>15 years in investigative journalism. Former foreign correspondent for the Associated Press.</p>
+                    <div>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <!-- Team member 2 -->
+                <div>
+                    <div><i class="fas fa-user-circle"></i></div>
+                    <h4>Mark Rivera</h4>
+                    <span>Senior Political Correspondent</span>
+                    <p>Covered three U.S. elections and the Middle East peace process. Passionate about democratic accountability.</p>
+                    <div>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <!-- Team member 3 -->
+                <div>
+                    <div><i class="fas fa-user-circle"></i></div>
+                    <h4>Dr. Aisha Khan</h4>
+                    <span>Science &amp; Health Editor</span>
+                    <p>PhD in Neuroscience. Previously at Nature and The Lancet. Translates complex research into accessible stories.</p>
+                    <div>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <!-- Team member 4 -->
+                <div>
+                    <div><i class="fas fa-user-circle"></i></div>
+                    <h4>Liam O'Brien</h4>
+                    <span>Culture &amp; Lifestyle Editor</span>
+                    <p>Art critic and former festival organiser. Covers music, film, literature, and the creative economy.</p>
+                    <div>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <!-- Team member 5 -->
+                <div>
+                    <div><i class="fas fa-user-circle"></i></div>
+                    <h4>Sarah Chen</h4>
+                    <span>Investigative Reporter</span>
+                    <p>Pulitzer finalist for her work on corporate fraud. Specialises in financial and legal investigations.</p>
+                    <div>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <!-- Team member 6 -->
+                <div>
+                    <div><i class="fas fa-user-circle"></i></div>
+                    <h4>Carlos Mendez</h4>
+                    <span>Sports Desk Chief</span>
+                    <p>Former sports journalist at ESPN. Covers everything from football to Formula 1 with insider insight.</p>
+                    <div>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== OUR HISTORY (timeline) ===== -->
+    <section>
+        <div>
+            <div>
+                <h2>Our <span>Journey</span></h2>
+                <p>From a small newsletter to a global newsroom — here's how we grew.</p>
+            </div>
+            <div>
+                <div>
+                    <span>2022</span>
+                    <div>
+                        <h4>Founded in Brooklyn</h4>
+                        <p>Started as a hyperlocal newsletter covering neighbourhood issues. Our first subscriber was a local librarian.</p>
+                    </div>
+                </div>
+                <div>
+                    <span>2023</span>
+                    <div>
+                        <h4>First National Story</h4>
+                        <p>Broke a major housing scandal, attracting our first 10,000 readers and our first investigative hire.</p>
+                    </div>
+                </div>
+                <div>
+                    <span>2024</span>
+                    <div>
+                        <h4>Global Expansion</h4>
+                        <p>Opened bureaus in London, Nairobi, and Singapore. Grew the team to 30 journalists.</p>
+                    </div>
+                </div>
+                <div>
+                    <span>2025</span>
+                    <div>
+                        <h4>Digital Innovation</h4>
+                        <p>Launched our podcast, interactive data visualisations, and a daily morning briefing.</p>
+                    </div>
+                </div>
+                <div>
+                    <span>2026</span>
+                    <div>
+                        <h4>Today</h4>
+                        <p>Over 50,000 daily readers, 45 journalists, and a commitment to independent journalism that has never been stronger.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHY TRUST US ===== -->
+    <section>
+        <div>
+            <div>
+                <h2>Why <span>Trust Us</span></h2>
+                <p>Our readers rely on us for integrity, transparency, and accuracy. Here’s how we earn that trust every day.</p>
+            </div>
+            <div>
+                <div>
+                    <i class="fas fa-check-circle"></i>
+                    <h4>Fact‑Checked Reporting</h4>
+                    <p>Every article is reviewed by at least two editors. We correct errors openly.</p>
+                </div>
+                <div>
+                    <i class="fas fa-handshake"></i>
+                    <h4>No Paywalls</h4>
+                    <p>We believe vital information should be free. Our journalism is supported by readers, not ads.</p>
+                </div>
+                <div>
+                    <i class="fas fa-users"></i>
+                    <h4>Community‑Driven</h4>
+                    <p>We listen to our audience. Story ideas often come directly from our readers.</p>
+                </div>
+                <div>
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Ethical Standards</h4>
+                    <p>We adhere to a strict code of ethics — no conflicts of interest, no hidden agendas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== JOIN US (careers) ===== -->
+    <section>
+        <div>
+            <div>
+                <h2>Join <span>Our Team</span></h2>
+                <p>We're always looking for passionate journalists, designers, and developers. If you believe in the power of truth, we want to hear from you.</p>
+                <a href="mailto:careers@theraptor.com"><i class="fas fa-paper-plane"></i> careers@theraptor.com</a>
+                <span>Current openings: Reporter (US), Data Journalist (Remote), Social Media Editor</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEWSLETTER (identical to index) ===== -->
+    <section>
+        <div>
+            <div>
+                <h2>Subscribe to <span>The Raptor</span> Daily</h2>
+                <p>Join over 250,000 readers who start their morning with our curated briefing. Get the top 5 stories, exclusive insights, and a weekly deep‑dive — all free.</p>
+                <div>
+                    <form>
+                        <div>
+                            <label for="aboutNewsletterEmail">Email address</label>
+                            <input type="email" id="aboutNewsletterEmail" placeholder="you@example.com" required />
+                        </div>
+                        <div>
+                            <label for="aboutNewsletterFrequency">Preferred frequency</label>
+                            <select id="aboutNewsletterFrequency">
+                                <option value="daily">Daily (every morning)</option>
+                                <option value="weekly">Weekly (every Monday)</option>
+                                <option value="weekend">Weekend roundup (Saturday)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" checked /> I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms</a>
+                            </label>
+                            <label>
+                                <input type="checkbox" /> I want to receive occasional special reports and offers
+                            </label>
+                        </div>
+                        <button type="submit"><i class="fas fa-envelope"></i> Subscribe Now</button>
+                    </form>
+                    <div>
+                        <span><i class="fas fa-check-circle"></i> No spam, unsubscribe anytime</span>
+                        <span><i class="fas fa-lock"></i> Your data is secure</span>
+                        <span><i class="fas fa-star"></i> Trusted by 250k+ readers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER (identical to index) ===== -->
+    <footer>
+        <div>
+            <div>
+                <div>
+                    <a href="index.html">The<span>Raptor</span></a>
+                    <p>Independent, fact‑based journalism since 2012. We believe in the power of stories to inform, inspire, and drive change. Our team of 45 journalists operates across 20 countries.</p>
+                    <div>
+                        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Homepage</a></li>
+                        <li><a href="blog.html">All Articles</a></li>
+                        <li><a href="podcast.html">Podcast</a></li>
+                        <li><a href="about.html">Our Team</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Advertise</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#">World</a> (126)</li>
+                        <li><a href="#">Technology</a> (98)</li>
+                        <li><a href="#">Business</a> (74)</li>
+                        <li><a href="#">Sports</a> (52)</li>
+                        <li><a href="#">Culture</a> (43)</li>
+                        <li><a href="#">Science</a> (38)</li>
+                        <li><a href="#">Health</a> (31)</li>
+                        <li><a href="#">Travel</a> (27)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Get in Touch</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:info@theraptor.com">info@theraptor.com</a></li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-pin"></i> 123 News Avenue, New York, NY 10001</li>
+                        <li><i class="fas fa-clock"></i> Mon–Fri: 8:00 AM – 10:00 PM (EST)</li>
+                    </ul>
+                    <h4>Archives</h4>
+                    <ul>
+                        <li><a href="#">2026</a> • <a href="#">2025</a> • <a href="#">2024</a></li>
+                        <li><a href="#">Special Reports</a> • <a href="#">Interviews</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <p>&copy; 2026 The Raptor Media Group. All rights reserved. | ISSN 2834-5678</p>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Settings</a>
+                    <a href="#">Accessibility</a>
+                    <a href="#">RSS Feed</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
 </body>
 </html>
